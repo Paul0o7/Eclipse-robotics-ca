@@ -21,8 +21,15 @@ import {
   Download,
   Loader2,
   Copy,
-  Check
+  Check,
+  Play
 } from 'lucide-react';
+
+/**
+ * Eclipse Robotics VEX U Website
+ * Consolidated from provided source files.
+ * Updated: Enhanced Instagram Reel/Video handling.
+ */
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -35,7 +42,7 @@ const App = () => {
   const [igPosts, setIgPosts] = useState([]);
   const [loadingIg, setLoadingIg] = useState(true);
 
-  // YOUR LIVE BEHOLD URL
+  // Constants
   const BEHOLD_URL = "https://feeds.behold.so/t2cK9m9tg80BDruckAjN"; 
   const TEAM_EMAIL = "eclipseroboticsca@gmail.com";
 
@@ -52,7 +59,7 @@ const App = () => {
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         
-        // Behold JSON can sometimes be an array or an object containing an array
+        // Handle different Behold response structures
         const posts = Array.isArray(data) ? data : (data.posts || []);
         setIgPosts(posts.slice(0, 4));
       } catch (error) {
@@ -77,8 +84,6 @@ const App = () => {
   };
 
   const copyToClipboard = () => {
-    // navigator.clipboard.writeText may not work in all iframe environments, 
-    // using document.execCommand fallback logic
     const textArea = document.createElement("textarea");
     textArea.value = TEAM_EMAIL;
     document.body.appendChild(textArea);
@@ -134,7 +139,7 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center space-x-2 cursor-pointer group" onClick={() => { setActiveTab('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }}>
           <EclipseLogo className="h-10 w-auto text-white group-hover:text-blue-400 transition-colors" />
-          <span className="hidden sm:block text-xl font-black tracking-tighter ml-2 italic">VEX <span className="text-blue-500">U</span></span>
+          <span className="hidden sm:block text-xl font-black tracking-tighter ml-2 italic text-white">VEX <span className="text-blue-500">U</span></span>
         </div>
         <div className="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase">
           {['home', 'team', 'sponsorship', 'contact'].map((item) => (
@@ -160,7 +165,7 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-end mb-12">
           <div>
-            <h2 className="text-3xl font-bold flex items-center gap-3 italic uppercase"><Instagram className="text-pink-500" /> Live Feed</h2>
+            <h2 className="text-3xl font-bold flex items-center gap-3 italic uppercase text-white"><Instagram className="text-pink-500" /> Live Feed</h2>
             <p className="text-gray-500 mt-2">Latest from @eclipse_robotics via Behold.</p>
           </div>
           <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="text-blue-400 flex items-center gap-1 font-bold text-sm hover:underline">
@@ -177,8 +182,13 @@ const App = () => {
             ))
           ) : igPosts.length > 0 ? (
             igPosts.map((post) => {
-              // Enhanced Image Logic: Check for media_url, mediaUrl, or thumbnail_url (for Reels)
-              const imageUrl = post.mediaUrl || post.media_url || post.thumbnail_url || post.thumbnailUrl;
+              // REEL/VIDEO HANDLING:
+              // If it's a video/reel, prioritize the thumbnailUrl so the <img> tag doesn't try to load an .mp4
+              const isVideo = post.mediaType === 'VIDEO' || post.media_type === 'VIDEO';
+              const imageUrl = isVideo 
+                ? (post.thumbnailUrl || post.thumbnail_url || post.mediaUrl || post.media_url)
+                : (post.mediaUrl || post.media_url || post.thumbnailUrl || post.thumbnail_url);
+              
               return (
                 <div 
                   key={post.id} 
@@ -194,8 +204,16 @@ const App = () => {
                       e.target.src = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800';
                     }}
                   />
+                  
+                  {/* Reel/Video Indicator Icon */}
+                  {isVideo && (
+                    <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm p-1.5 rounded-lg z-10 border border-white/10">
+                      <Play size={14} fill="white" className="text-white" />
+                    </div>
+                  )}
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                    <div className="flex items-center gap-4 text-sm font-bold">
+                    <div className="flex items-center gap-4 text-sm font-bold text-white">
                       <span className="flex items-center gap-1"><Heart size={16} fill="currentColor" /> {post.likeCount || post.likes || ''}</span>
                       <span className="flex items-center gap-1"><MessageCircle size={16} fill="currentColor" /></span>
                     </div>
@@ -220,7 +238,7 @@ const App = () => {
       <Navigation />
       
       {showConfirmation && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[60] w-full max-sm px-6 animate-in slide-in-from-top-4 duration-300">
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[60] w-full max-w-sm px-6 animate-in slide-in-from-top-4 duration-300">
           <div className="bg-blue-600 text-white p-4 rounded-xl shadow-2xl flex items-center gap-3 border border-blue-400">
             <CheckCircle2 size={24} className="flex-shrink-0" />
             <div>
@@ -241,7 +259,7 @@ const App = () => {
                   <span className="text-xs font-semibold text-blue-400 tracking-widest uppercase italic">Collegiate VEX U Collective</span>
                 </div>
                 <div className="flex justify-center mb-8"><EclipseLogo className="w-72 md:w-96 h-auto text-white" /></div>
-                <h1 className="text-4xl md:text-7xl font-black mb-6 tracking-tighter uppercase italic leading-tight">Total <span className="text-blue-500">Engineering</span></h1>
+                <h1 className="text-4xl md:text-7xl font-black mb-6 tracking-tighter uppercase italic leading-tight text-white">Total <span className="text-blue-500">Engineering</span></h1>
                 <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12">Building the next generation of robotics innovators through VEX U competition.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <button onClick={() => { setActiveTab('team'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-white text-black font-black px-10 py-4 rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-all active:scale-95 shadow-xl">
@@ -258,7 +276,7 @@ const App = () => {
               <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                   <div className="max-w-2xl">
-                    <h2 className="text-4xl font-bold mb-4 uppercase italic tracking-tight">VEX U Standards</h2>
+                    <h2 className="text-4xl font-bold mb-4 uppercase italic tracking-tight text-white">VEX U Standards</h2>
                     <p className="text-gray-400 text-lg leading-relaxed">Pushing the limits with custom fabrication, precision coding, and advanced sensor fusion.</p>
                   </div>
                   <div className="flex gap-4">
@@ -280,7 +298,7 @@ const App = () => {
                   ].map((item, i) => (
                     <div key={i} className="p-10 rounded-3xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all group">
                       <div className="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform">{item.icon}</div>
-                      <h3 className="text-2xl font-bold mb-3 italic uppercase">{item.title}</h3>
+                      <h3 className="text-2xl font-bold mb-3 italic uppercase text-white">{item.title}</h3>
                       <p className="text-gray-500 leading-relaxed">{item.desc}</p>
                     </div>
                   ))}
@@ -294,7 +312,7 @@ const App = () => {
         
         {activeTab === 'team' && (
           <div className="pt-32 pb-20 max-w-7xl mx-auto px-6">
-            <h2 className="text-5xl font-black mb-12 uppercase italic tracking-tighter">The Collective</h2>
+            <h2 className="text-5xl font-black mb-12 uppercase italic tracking-tighter text-white">The Collective</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="p-10 bg-zinc-900/40 rounded-3xl border border-white/5 hover:border-blue-500/20 transition-colors group">
                 <h3 className="text-3xl font-bold mb-4 flex items-center gap-2 text-blue-400 group-hover:translate-x-1 transition-transform uppercase italic"><Cpu /> Mechanical</h3>
@@ -312,10 +330,10 @@ const App = () => {
           <div className="pt-32 pb-20 max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
               <div className="text-center md:text-left">
-                <h2 className="text-5xl font-black uppercase italic mb-4">Partner <span className="text-blue-500">With Us</span></h2>
+                <h2 className="text-5xl font-black uppercase italic mb-4 text-white">Partner <span className="text-blue-500">With Us</span></h2>
                 <p className="text-gray-400 max-w-xl font-medium italic">Empower collegiate robotics and gain visibility within the STEM community.</p>
               </div>
-              <button className="flex items-center gap-3 bg-white/5 border border-white/10 px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all text-xs uppercase tracking-widest">
+              <button className="flex items-center gap-3 bg-white/5 border border-white/10 px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all text-xs uppercase tracking-widest text-white">
                 <Download size={18} /> Packet PDF
               </button>
             </div>
@@ -324,14 +342,14 @@ const App = () => {
               {sponsorshipTiers.map((tier, idx) => (
                 <div key={idx} className={`relative flex flex-col p-8 rounded-[2rem] border-2 bg-black transition-all hover:-translate-y-2 duration-300 ${tier.color} ${tier.featured ? 'scale-105 shadow-2xl shadow-blue-500/10' : 'opacity-80'}`}>
                   {tier.featured && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-black tracking-widest uppercase">Elite Status</div>}
-                  <h3 className="text-2xl font-bold mb-2 uppercase">{tier.name}</h3>
-                  <div className="text-4xl font-black mb-6">{tier.price}</div>
+                  <h3 className="text-2xl font-bold mb-2 uppercase text-white">{tier.name}</h3>
+                  <div className="text-4xl font-black mb-6 text-white">{tier.price}</div>
                   <div className="flex-grow space-y-4 mb-8">
                     {tier.benefits.map((b, i) => <div key={i} className="flex items-center gap-3 text-sm text-gray-400 font-medium"><ShieldCheck size={18} className="text-blue-500 flex-shrink-0" /> {b}</div>)}
                   </div>
                   <button 
                     onClick={() => handleTierSelect(tier.name)}
-                    className={`w-full py-4 rounded font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 ${tier.featured ? 'bg-blue-600 hover:bg-blue-500' : 'bg-white/10 hover:bg-white/20'}`}
+                    className={`w-full py-4 rounded font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 text-white ${tier.featured ? 'bg-blue-600 hover:bg-blue-500' : 'bg-white/10 hover:bg-white/20'}`}
                   >
                     Select Partnership
                   </button>
@@ -343,15 +361,14 @@ const App = () => {
 
         {activeTab === 'contact' && (
           <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-5xl font-black mb-4 uppercase italic tracking-tighter">Get In <span className="text-blue-500">Touch</span></h2>
+            <h2 className="text-5xl font-black mb-4 uppercase italic tracking-tighter text-white">Get In <span className="text-blue-500">Touch</span></h2>
             <p className="text-gray-500 mb-12 max-w-xl mx-auto font-medium">
               Reach out for collaboration, sponsorship, or general inquiries.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {/* Email Block with Copy Functionality */}
               <div className="p-10 bg-zinc-900/40 rounded-3xl border border-white/5 text-left hover:border-blue-500/40 transition-all group relative">
                 <Mail className="text-blue-400 mb-4 group-hover:scale-110 transition-transform" size={40} />
-                <div className="font-bold text-2xl mb-2 italic">Inquiries</div>
+                <div className="font-bold text-2xl mb-2 italic text-white">Inquiries</div>
                 <div className="text-gray-500 truncate mb-1">{TEAM_EMAIL}</div>
                 
                 <div className="flex gap-2 mt-6">
@@ -370,7 +387,7 @@ const App = () => {
 
               <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="p-10 bg-zinc-900/40 rounded-3xl border border-white/5 text-left hover:border-pink-500/40 transition-all group">
                 <Instagram className="text-pink-500 mb-4 group-hover:scale-110 transition-transform" size={40} />
-                <div className="font-bold text-2xl mb-2 italic">Instagram</div>
+                <div className="font-bold text-2xl mb-2 italic text-white">Instagram</div>
                 <div className="text-gray-500 text-lg">@eclipse_robotics</div>
                 <div className="mt-6 text-pink-500 text-[10px] font-black uppercase tracking-widest">DM Us →</div>
               </a>
