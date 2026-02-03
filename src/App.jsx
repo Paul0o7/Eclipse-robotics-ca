@@ -12,13 +12,16 @@ import {
   Zap,
   Target,
   Trophy,
+  BookOpen,
   Instagram,
   Camera,
   Heart,
   MessageCircle,
   CheckCircle2,
   Download,
-  Loader2
+  Loader2,
+  Copy,
+  Check
 } from 'lucide-react';
 
 const App = () => {
@@ -26,6 +29,7 @@ const App = () => {
   const [scrolled, setScrolled] = useState(false);
   const [selectedTier, setSelectedTier] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [copied, setCopied] = useState(false);
   
   // Instagram Feed State
   const [igPosts, setIgPosts] = useState([]);
@@ -33,6 +37,7 @@ const App = () => {
 
   // YOUR LIVE BEHOLD URL
   const BEHOLD_URL = "https://feeds.behold.so/t2cK9m9tg80BDruckAjN"; 
+  const TEAM_EMAIL = "eclipseroboticsca@gmail.com";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,8 +51,10 @@ const App = () => {
         const response = await fetch(BEHOLD_URL);
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
-        // Behold typically returns an array of posts
-        setIgPosts(Array.isArray(data) ? data.slice(0, 4) : []);
+        
+        // Behold JSON can sometimes be an array or an object containing an array
+        const posts = Array.isArray(data) ? data : (data.posts || []);
+        setIgPosts(posts.slice(0, 4));
       } catch (error) {
         console.error("IG Feed Error:", error);
       } finally {
@@ -67,6 +74,23 @@ const App = () => {
       setActiveTab('contact');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 2000);
+  };
+
+  const copyToClipboard = () => {
+    // navigator.clipboard.writeText may not work in all iframe environments, 
+    // using document.execCommand fallback logic
+    const textArea = document.createElement("textarea");
+    textArea.value = TEAM_EMAIL;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
+    }
+    document.body.removeChild(textArea);
   };
 
   const EclipseLogo = ({ className = "w-12 h-12" }) => (
@@ -146,30 +170,40 @@ const App = () => {
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {loadingIg ? (
-            // Shimmer Loaders
             [1, 2, 3, 4].map(i => (
               <div key={i} className="aspect-square bg-white/5 rounded-xl animate-pulse flex items-center justify-center">
                 <Camera className="text-white/10" size={32} />
               </div>
             ))
           ) : igPosts.length > 0 ? (
-            igPosts.map((post) => (
-              <div 
-                key={post.id} 
-                className="aspect-square bg-white/5 rounded-xl border border-white/10 overflow-hidden relative group cursor-pointer"
-                onClick={() => window.open(post.permalink, '_blank')}
-              >
-                <img src={post.mediaUrl} alt="VEX U robotics" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                  <div className="flex items-center gap-4 text-sm font-bold">
-                    <span className="flex items-center gap-1"><Heart size={16} fill="currentColor" /> {post.likeCount || ''}</span>
-                    <span className="flex items-center gap-1"><MessageCircle size={16} fill="currentColor" /></span>
+            igPosts.map((post) => {
+              // Enhanced Image Logic: Check for media_url, mediaUrl, or thumbnail_url (for Reels)
+              const imageUrl = post.mediaUrl || post.media_url || post.thumbnail_url || post.thumbnailUrl;
+              return (
+                <div 
+                  key={post.id} 
+                  className="aspect-square bg-white/5 rounded-xl border border-white/10 overflow-hidden relative group cursor-pointer"
+                  onClick={() => window.open(post.permalink || `https://www.instagram.com/p/${post.id}`, '_blank')}
+                >
+                  <img 
+                    src={imageUrl} 
+                    alt="VEX U robotics" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    onError={(e) => {
+                      // Final fallback if link is expired or broken
+                      e.target.src = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <div className="flex items-center gap-4 text-sm font-bold">
+                      <span className="flex items-center gap-1"><Heart size={16} fill="currentColor" /> {post.likeCount || post.likes || ''}</span>
+                      <span className="flex items-center gap-1"><MessageCircle size={16} fill="currentColor" /></span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
-            // Fallback if URL is correct but feed is empty/restricted
             [1, 2, 3, 4].map(i => (
               <div key={i} className="aspect-square bg-zinc-900 rounded-xl flex items-center justify-center text-zinc-700 border border-white/5">
                 <Instagram size={32} />
@@ -314,16 +348,30 @@ const App = () => {
               Reach out for collaboration, sponsorship, or general inquiries.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <a href="mailto:eclipseroboticsca@gmail.com" className="p-10 bg-zinc-900/40 rounded-3xl border border-white/5 text-left hover:border-blue-500/40 transition-all group">
+              {/* Email Block with Copy Functionality */}
+              <div className="p-10 bg-zinc-900/40 rounded-3xl border border-white/5 text-left hover:border-blue-500/40 transition-all group relative">
                 <Mail className="text-blue-400 mb-4 group-hover:scale-110 transition-transform" size={40} />
                 <div className="font-bold text-2xl mb-2 italic">Inquiries</div>
-                <div className="text-gray-500">eclipseroboticsca@gmail.com</div>
-                <div className="mt-6 text-blue-400 text-[10px] font-black uppercase tracking-widest">Shoot Email →</div>
-              </a>
+                <div className="text-gray-500 truncate mb-1">{TEAM_EMAIL}</div>
+                
+                <div className="flex gap-2 mt-6">
+                  <a href={`mailto:${TEAM_EMAIL}`} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 transition-colors">
+                    Send Email
+                  </a>
+                  <button 
+                    onClick={copyToClipboard}
+                    className="bg-white/5 text-white border border-white/10 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-colors flex items-center gap-2"
+                  >
+                    {copied ? <Check size={12} /> : <Copy size={12} />}
+                    {copied ? 'Copied' : 'Copy'}
+                  </button>
+                </div>
+              </div>
+
               <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="p-10 bg-zinc-900/40 rounded-3xl border border-white/5 text-left hover:border-pink-500/40 transition-all group">
                 <Instagram className="text-pink-500 mb-4 group-hover:scale-110 transition-transform" size={40} />
                 <div className="font-bold text-2xl mb-2 italic">Instagram</div>
-                <div className="text-gray-500">@eclipse_robotics</div>
+                <div className="text-gray-500 text-lg">@eclipse_robotics</div>
                 <div className="mt-6 text-pink-500 text-[10px] font-black uppercase tracking-widest">DM Us →</div>
               </a>
             </div>
