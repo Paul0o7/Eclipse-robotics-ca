@@ -87,8 +87,8 @@ const teamMembers = [
 
 // Current Sponsors
 const currentSponsors = [
-  { name: "Onshape", logo: "https://via.placeholder.com/200x80/111/444?text=Onshape" },
-  { name: "MESA at UOP", logo: "https://via.placeholder.com/200x80/111/444?text=MESA+at+UOP" }
+  { name: "Onshape", logo: "https://www.onshape.com/cdn-images/2db2486ec4e220b607223acf5f79cfe5e02d7859-216x49.svg?w=1600" },
+  { name: "MESA at UOP", logo: "https://mesa.ucop.edu/wp-content/uploads/2019/09/MESA-logo_no-tag-60px.png" }
 ];
 
 // Individual Sponsors / Special Thanks
@@ -371,8 +371,8 @@ const App = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {[
-                    { icon: <Cpu />, title: "Machined Precision", desc: "Building VEX U robots with custom aluminum fabrication and precision CNC parts to outperform standard components." },
-                    { icon: <Zap />, title: "Intelligent Drive", desc: "Proprietary PID loops and motion profiling tuned for high-stakes competition environments." },
+                    { icon: <Cpu />, title: "Machined Precision", desc: "Building VEX U robots with custom-CADing every millimeter of our robot and manufacturing it ourselves on a shoestring to outperform standard components." },
+                    { icon: <Zap />, title: "Intelligent Drive", desc: "Custom manufactured odom and pid for precision and weight reduction." },
                     { icon: <Trophy />, title: "Global Stage", desc: "Representing California collegiate engineering at the world's largest robotics competition." }
                   ].map((item, i) => (
                     <div key={i} className="p-10 rounded-3xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all group">
