@@ -94,7 +94,7 @@ const currentSponsors = [
 
   { 
     name: "Open Innovation Centrers", 
-    logo: "https://www.openinnovationcenters.com/img/mark.svg" 
+    logo: "https://www.openinnovationcenters.com/img/mark.png" 
   },
   
   { 
