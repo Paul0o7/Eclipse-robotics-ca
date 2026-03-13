@@ -91,6 +91,12 @@ const currentSponsors = [
     name: "Onshape", 
     logo: "https://www.onshape.com/cdn-images/2db2486ec4e220b607223acf5f79cfe5e02d7859-216x49.svg?w=1600" 
   },
+
+  { 
+    name: "Open Innovation Centrers", 
+    logo: "https://www.openinnovationcenters.com/img/mark.svg" 
+  },
+  
   { 
     name: "MESA at UOP", 
     logo: "https://mesa.ucop.edu/wp-content/uploads/2019/09/MESA-logo_no-tag-60px.png" 
