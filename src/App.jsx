@@ -29,13 +29,14 @@ import {
   Award,
   Sparkles,
   BookOpen,
-  User
+  User,
+  Plane
 } from 'lucide-react';
 
 /**
  * Eclipse Robotics VEX U Website
  * High-performance landing page for a collegiate robotics team.
- * Optimized for Vercel with functional PDF downloads.
+ * Fully updated for the Missouri World Championship.
  */
 
 // --- SHARED DATA ---
@@ -45,7 +46,6 @@ const CONTACT_PERSON = "Paul Corisuelo Valencia";
 const CONTACT_PHONE = "(209) 689-6655";
 const PACKET_PDF_URL = "/Eclipse_Robotics_Sponsorship_Packet.pdf";
 
-// Team Data - Ordered: Elijah, Paul, Gabriel, Aleksei, Emily, Janna.
 const teamMembers = [
   {
     name: "Elijah Macatuno",
@@ -85,25 +85,21 @@ const teamMembers = [
   }
 ];
 
-// Current Sponsors - Updated with live brand logos
 const currentSponsors = [
   { 
     name: "Onshape", 
     logo: "https://www.onshape.com/cdn-images/2db2486ec4e220b607223acf5f79cfe5e02d7859-216x49.svg?w=1600" 
   },
-
   { 
-    name: "Open Innovation Centrers", 
+    name: "Open Innovation Centers", 
     logo: "https://www.openinnovationcenters.com/img/mark.png" 
   },
-  
   { 
     name: "MESA at UOP", 
     logo: "https://mesa.ucop.edu/wp-content/uploads/2019/09/MESA-logo_no-tag-60px.png" 
   }
 ];
 
-// Individual Sponsors / Special Thanks
 const individualSponsors = [
   { name: "Rose Cureton", role: "Individual Sponsor" },
   { name: "Jonathan Ceja", role: "Individual Sponsor" },
@@ -112,6 +108,31 @@ const individualSponsors = [
 ];
 
 // --- SUB-COMPONENTS ---
+
+const EclipseLogo = ({ className = "w-12 h-12" }) => (
+  <svg 
+    version="1.0" 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 600 600" 
+    preserveAspectRatio="xMidYMid meet"
+    className={className}
+  >
+    <g transform="translate(0.000000,600.000000) scale(0.050000,-0.050000)" fill="currentColor" stroke="none">
+      <path d="M5640 8078 c-710 -86 -1363 -534 -1674 -1148 -28 -55 -54 -104 -58-108 -4 -4 -172 -42 -373 -83 l-365 -75 770 -2 770 -2 86 168 c341 668 976 1058 1719 1057 146 -1 265 2 265 5 0 4 -75 34 -168 67 -301 109 -683 157 -972 121z m-244 -235 c5 -32 -4 -43 -33 -43 -53 0 -73 34 -42 72 33 39 67 26 75-29z m-1035 -694 c21 -26 20 -37 -6 -62 -36 -37 -75 -21 -75 31 0 65 40 81 81 31z"/>
+      <path d="M6230 7826 c-519 -116 -1026 -509 -1256 -974 -89 -180 -90 -192 -18 -192 49 0 62 15 110 126 206 472 662 869 1164 1011 120 34 120 56 0 29z"/>
+      <path d="M3219 6433 c-406 -110 -599 -667 -294 -853 57 -35 101 -40 378 -40l312 0 11 55 c6 30 17 70 24 89 12 30 -16 34 -290 40 -291 6 -305 8 -342 53 -93 116 -74 123 322 123 401 0 363 -13 409 135 l14 45 -362 0 c-382 0 -392 3 -306 85 86 82 148 95 454 95 l286 0 12 55 c7 30 18 75 25 100 l13 45 -288 -1c-159 -1 -327 -13 -378 -26z"/>
+      <path d="M4335 6438 c-281 -66 -488 -324 -472 -586 18 -281 167 -338 812 -313 24 1 41 32 73 135 14 43 12 43 -289 50 l-303 6 -48 56 c-92 107 -48 285 99 403 l77 61 317 6 318 7 20 73 c36 129 46 124 -254 122 -151 -1 -309 -10 -350 -20z"/>
+      <path d="M5112 6443 c-4 -7 -44 -136 -90 -287 -161 -535 -106 -616 418 -616 333 0 303 -12 349 135 l14 45 -277 0 c-427 1 -439 18 -308 449 44 143 78 261 76 263 -16 11 -176 21 -182 11z"/>
+      <path d="M6108 6282 c-29 -95 -91 -298 -138 -452 l-86 -280 90 -6 c114 -8 89 -54 237 439 153 510 149 468 39 470 l-90 1 -52 -172z"/>
+      <path d="M6512 6366 c-18 -51 -32 -96 -32 -100 0 -3 161 -6 359 -6 438 0 509 -35 363 -182 -58 -57 -63 -58 -278 -58 l-219 0 -23 -89 c-12 -49 -22 -95 -22 -102 0 -35 470 4 550 46 282 147 320 505 60 566 -44 10 -225 18 -403 19 l-323 0 -32 -94z"/>
+      <path d="M7851 6438 c-246 -58 -371 -350 -209 -487 58 -48 74 -51 288 -51 278 0 350 -40 250 -140 -37 -37 -67 -40 -389 -40 l-349 0 -21 -75 c-36 -129 -54 -123 344 -119 453 5 577 60 637 280 54 203 -41 274 -367 274 -274 0 -337 38 -235 140 37 37 67 40 388 40 l348 0 13 71 c7 40 18 85 24 100 13 34 -582 39 -722 7z"/>
+      <path d="M9035 6438 c-339 -79 -569 -473 -431 -737 78 -151 147 -171 559 -165 l233 4 22 63 c42 119 47 117 -260 117 l-281 0 -59 58 c-115 116 -99 122 309 122 l367 0 23 77 c13 43 23 83 23 90 0 7 -163 13 -362 13 -396 0 -402 2 -270 109 l76 61 316 6 316 7 22 87 c12 48 22 93 22 99 0 18 -543 9 -625 -11z"/>
+      <path d="M6344 5795 c-79 -276 -82 -255 25 -255 l90 0 52 175 c28 96 60 201 70 233 11 32 19 61 19 65 0 4 -43 7 -96 7 l-96 0 -64 -225z"/>
+      <path d="M3420 5229 c237 -48 432 -87 434 -88 2 0 39 -76 83 -168 510 -1090 1791 -1551 2858 -1029 191 93 196 100 45 72 -821 -152 -1738 359 -2078 1157 l-59 137 -856 3 -857 3 430 -87z m876 -294 c5 -24 -6 -35 -33 -35 -46 0 -72 30 -52 61 19 32 78 14 85 -26z"/>
+      <path d="M4880 5298 c0 -47 164 -368 248 -486 263 -369 786 -700 1202 -761 44 -7 4 11 -90 40 -493 150 -907 506 -1141 979 -55 110 -99 211 -99 225 0 14 -25 25 -60 25 -33 0 -60 -10 -60 -22z"/>
+    </g>
+  </svg>
+);
 
 const InstagramFeed = ({ loading, posts }) => (
   <section className="py-24 bg-zinc-950 border-t border-white/5">
@@ -273,31 +294,6 @@ const App = () => {
     document.body.removeChild(textArea);
   };
 
-  const EclipseLogo = ({ className = "w-12 h-12" }) => (
-    <svg 
-      version="1.0" 
-      xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 600 600" 
-      preserveAspectRatio="xMidYMid meet"
-      className={className}
-    >
-      <g transform="translate(0.000000,600.000000) scale(0.050000,-0.050000)" fill="currentColor" stroke="none">
-        <path d="M5640 8078 c-710 -86 -1363 -534 -1674 -1148 -28 -55 -54 -104 -58-108 -4 -4 -172 -42 -373 -83 l-365 -75 770 -2 770 -2 86 168 c341 668 976 1058 1719 1057 146 -1 265 2 265 5 0 4 -75 34 -168 67 -301 109 -683 157 -972 121z m-244 -235 c5 -32 -4 -43 -33 -43 -53 0 -73 34 -42 72 33 39 67 26 75-29z m-1035 -694 c21 -26 20 -37 -6 -62 -36 -37 -75 -21 -75 31 0 65 40 81 81 31z"/>
-        <path d="M6230 7826 c-519 -116 -1026 -509 -1256 -974 -89 -180 -90 -192 -18 -192 49 0 62 15 110 126 206 472 662 869 1164 1011 120 34 120 56 0 29z"/>
-        <path d="M3219 6433 c-406 -110 -599 -667 -294 -853 57 -35 101 -40 378 -40l312 0 11 55 c6 30 17 70 24 89 12 30 -16 34 -290 40 -291 6 -305 8 -342 53 -93 116 -74 123 322 123 401 0 363 -13 409 135 l14 45 -362 0 c-382 0 -392 3 -306 85 86 82 148 95 454 95 l286 0 12 55 c7 30 18 75 25 100 l13 45 -288 -1c-159 -1 -327 -13 -378 -26z"/>
-        <path d="M4335 6438 c-281 -66 -488 -324 -472 -586 18 -281 167 -338 812 -313 24 1 41 32 73 135 14 43 12 43 -289 50 l-303 6 -48 56 c-92 107 -48 285 99 403 l77 61 317 6 318 7 20 73 c36 129 46 124 -254 122 -151 -1 -309 -10 -350 -20z"/>
-        <path d="M5112 6443 c-4 -7 -44 -136 -90 -287 -161 -535 -106 -616 418 -616 333 0 303 -12 349 135 l14 45 -277 0 c-427 1 -439 18 -308 449 44 143 78 261 76 263 -16 11 -176 21 -182 11z"/>
-        <path d="M6108 6282 c-29 -95 -91 -298 -138 -452 l-86 -280 90 -6 c114 -8 89 -54 237 439 153 510 149 468 39 470 l-90 1 -52 -172z"/>
-        <path d="M6512 6366 c-18 -51 -32 -96 -32 -100 0 -3 161 -6 359 -6 438 0 509 -35 363 -182 -58 -57 -63 -58 -278 -58 l-219 0 -23 -89 c-12 -49 -22 -95 -22 -102 0 -35 470 4 550 46 282 147 320 505 60 566 -44 10 -225 18 -403 19 l-323 0 -32 -94z"/>
-        <path d="M7851 6438 c-246 -58 -371 -350 -209 -487 58 -48 74 -51 288 -51 278 0 350 -40 250 -140 -37 -37 -67 -40 -389 -40 l-349 0 -21 -75 c-36 -129 -54 -123 344 -119 453 5 577 60 637 280 54 203 -41 274 -367 274 -274 0 -337 38 -235 140 37 37 67 40 388 40 l348 0 13 71 c7 40 18 85 24 100 13 34 -582 39 -722 7z"/>
-        <path d="M9035 6438 c-339 -79 -569 -473 -431 -737 78 -151 147 -171 559 -165 l233 4 22 63 c42 119 47 117 -260 117 l-281 0 -59 58 c-115 116 -99 122 309 122 l367 0 23 77 c13 43 23 83 23 90 0 7 -163 13 -362 13 -396 0 -402 2 -270 109 l76 61 316 6 316 7 22 87 c12 48 22 93 22 99 0 18 -543 9 -625 -11z"/>
-        <path d="M6344 5795 c-79 -276 -82 -255 25 -255 l90 0 52 175 c28 96 60 201 70 233 11 32 19 61 19 65 0 4 -43 7 -96 7 l-96 0 -64 -225z"/>
-        <path d="M3420 5229 c237 -48 432 -87 434 -88 2 0 39 -76 83 -168 510 -1090 1791 -1551 2858 -1029 191 93 196 100 45 72 -821 -152 -1738 359 -2078 1157 l-59 137 -856 3 -857 3 430 -87z m876 -294 c5 -24 -6 -35 -33 -35 -46 0 -72 30 -52 61 19 32 78 14 85 -26z"/>
-        <path d="M4880 5298 c0 -47 164 -368 248 -486 263 -369 786 -700 1202 -761 44 -7 4 11 -90 40 -493 150 -907 506 -1141 979 -55 110 -99 211 -99 225 0 14 -25 25 -60 25 -33 0 -60 -10 -60 -22z"/>
-      </g>
-    </svg>
-  );
-
   const Navigation = () => (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -347,7 +343,7 @@ const App = () => {
                   Total <span className="text-blue-500">Engineering</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed italic text-center">
-                  Building the future through VEX U competition. We're headed to the Global Championship in Dallas and we want you with us.
+                  Building the future through VEX U Competitions. We're headed to the World Championship in Missouri and we want you with us.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <button onClick={() => { setActiveTab('team'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-white text-black font-black px-10 py-4 rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-all active:scale-95 shadow-xl w-full sm:w-auto justify-center uppercase tracking-widest text-xs">
@@ -366,7 +362,7 @@ const App = () => {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                   <div className="max-w-2xl text-center md:text-left">
                     <h2 className="text-4xl font-black mb-4 uppercase italic tracking-tight text-white">Championship Performance</h2>
-                    <p className="text-gray-400 text-lg leading-relaxed italic">Our team has officially secured a spot at the VEX Robotics World Championship in Dallas, Texas.</p>
+                    <p className="text-gray-400 text-lg leading-relaxed italic">Our team has officially secured a spot at the VEX Robotics World Championship in Missouri.</p>
                   </div>
                   <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
                     {[
@@ -429,7 +425,7 @@ const App = () => {
         {activeTab === 'team' && (
           <div className="pt-32 pb-20 max-w-7xl mx-auto px-6">
             <h2 className="text-6xl font-black mb-12 uppercase italic tracking-tighter text-white">The <span className="text-blue-500">Collective</span></h2>
-            <p className="text-gray-400 text-xl max-w-3xl mb-16 leading-relaxed font-medium italic">
+            <p className="text-gray-400 text-xl max-w-3xl mb-16 leading-relaxed font-medium italic text-center mx-auto">
               Founded as a high school team, we transitioned to the collegiate VEX U division to continue 
               challenging our technical skills as future engineers.
             </p>
@@ -476,12 +472,12 @@ const App = () => {
               <div>
                 <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/20 px-4 py-1 rounded-full mb-4">
                   <Globe size={14} className="text-blue-400" />
-                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 italic">2026 VEX Worlds Qualifier</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 italic">Official Worlds Qualifier</span>
                 </div>
                 <h2 className="text-6xl font-black uppercase italic mb-4 text-white tracking-tighter leading-tight">Worlds <span className="text-blue-500">Fundraising</span></h2>
                 <p className="text-gray-400 max-w-xl font-medium italic text-lg leading-relaxed">
-                  Help empower student innovators as we prepare to compete on the global stage in Dallas. 
-                  We have officially qualified and are raising funds to cover logistics and technical development.
+                  Help empower student innovators as we prepare to compete on the global stage in Missouri. 
+                  We have officially qualified and are raising funds to cover registration, flights, and technical development.
                 </p>
               </div>
               <div className="flex flex-col items-center md:items-end gap-4">
@@ -500,7 +496,7 @@ const App = () => {
 
             {/* Current Sponsors Section */}
             <div className="mb-24 py-16 border-y border-white/5">
-              <div className="flex items-center gap-3 mb-12">
+              <div className="flex items-center gap-3 mb-12 justify-center md:justify-start">
                  <Award className="text-blue-500" size={24} />
                  <h3 className="text-2xl font-black uppercase italic text-white tracking-tight">Our Current Partners</h3>
               </div>
@@ -512,15 +508,15 @@ const App = () => {
               {[
                 { title: "Visibility", items: ["Tournament Presence", "Team Apparel Logos", "Social Media Outreach"] },
                 { title: "Impact", items: ["Technical R&D", "Youth STEM Workshops", "Regional Leadership"] },
-                { title: "Allocation", items: ["40% Robot Systems", "25% Logistics", "25% Entry Fees", "10% Outreach"] },
+                { title: "Allocation", items: ["35% Flights & Travel", "25% Robot Systems", "15% Registration Fees", "10% Outreach"] },
                 { title: "Recognition", items: ["Robot Labeling", "Event Banners", "Reveal Features"] }
               ].map((card, i) => (
                 <div key={i} className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 relative group overflow-hidden">
                   <div className="absolute -top-4 -right-4 text-white/5 group-hover:text-blue-500/10 transition-colors font-black text-6xl italic leading-none">0{i+1}</div>
                   <h4 className="text-blue-400 font-black text-sm uppercase tracking-widest mb-6 italic">{card.title}</h4>
-                  <ul className="space-y-3 text-xs text-zinc-400 font-medium leading-relaxed italic">
+                  <ul className="space-y-3 text-xs text-zinc-400 font-medium leading-relaxed italic text-center">
                     {card.items.map((it, idx) => (
-                      <li key={idx} className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full" /> {it}</li>
+                      <li key={idx} className="flex items-center gap-2 justify-center"><div className="w-1 h-1 bg-blue-500 rounded-full" /> {it}</li>
                     ))}
                   </ul>
                 </div>
@@ -530,13 +526,13 @@ const App = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="p-10 bg-zinc-900/40 rounded-[2rem] border border-white/5 group hover:border-blue-500/20 transition-colors">
                 <h3 className="text-2xl font-black mb-4 uppercase italic text-white flex items-center gap-3">
-                  <Target className="text-blue-500" /> In-Kind Donations
+                  <Plane className="text-blue-500" /> VEX Worlds Logistics
                 </h3>
-                <p className="text-gray-400 mb-6 font-medium leading-relaxed italic">
-                  We welcome contributions of materials and tools that directly impact our build process.
+                <p className="text-gray-400 mb-6 font-medium leading-relaxed italic text-center">
+                  Registration for Worlds and international flights for our team collective represent our primary seasonal expenses.
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {["Aluminum", "Lexan", "Tools", "Team Meals"].map(item => (
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {["Flights", "Registration Fees", "Hotel", "Shipping"].map(item => (
                     <span key={item} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-blue-400 italic">{item}</span>
                   ))}
                 </div>
@@ -548,11 +544,11 @@ const App = () => {
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="text-blue-500 flex-shrink-0" size={20} />
-                    <p className="text-sm text-zinc-400 font-medium italic">Checks to <span className="text-white font-bold">Eclipse Robotics</span> or via our secure portal.</p>
+                    <p className="text-sm text-zinc-400 font-medium italic text-center w-full">Checks to <span className="text-white font-bold">Eclipse Robotics</span> or via our secure portal.</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="text-blue-500 flex-shrink-0" size={20} />
-                    <p className="text-sm text-zinc-400 font-medium italic">Every contribution directly supports our trip to the World Championship.</p>
+                    <p className="text-sm text-zinc-400 font-medium italic text-center w-full">Every contribution directly supports our journey to VEX Worlds in Missouri.</p>
                   </div>
                 </div>
               </div>
