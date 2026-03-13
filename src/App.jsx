@@ -5,6 +5,7 @@ import {
   Mail, 
   ExternalLink, 
   ChevronRight,
+  ChevronLeft,
   Zap, 
   Trophy,
   Instagram,
@@ -30,13 +31,17 @@ import {
   Sparkles,
   BookOpen,
   User,
-  Plane
+  Plane,
+  History,
+  Medal,
+  Star,
+  Settings,
+  ArrowUpRight
 } from 'lucide-react';
 
 /**
  * Eclipse Robotics VEX U Website
- * High-performance landing page for a collegiate robotics team.
- * Fully updated for the Missouri World Championship.
+ * Final Build: Missouri World Championship 2026 Edition
  */
 
 // --- SHARED DATA ---
@@ -51,53 +56,44 @@ const teamMembers = [
     name: "Elijah Macatuno",
     role: "Team Lead, CAD, Builder",
     desc: "Directing technical strategy and system architecture while spearheading hardware fabrication.",
-    img: "https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending"
+    img: "/5559.jpg"
   },
   {
     name: "Paul Consuelo-Valencia",
     role: "CAD and Build",
     desc: "Specializing in high-tolerance mechanical design and custom aluminum part fabrication.",
-    img: "https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending"
+    img: "/5558.jpg"
   },
   {
     name: "Gabriel Salazar-Dinh",
     role: "Programming and Build",
     desc: "Hi! My name is Gabriel, and I'm the programmer for Eclipse Robotics. I've been programming for VEX since junior year of high school, and am continuing that throughout college. I'm attending the University of the Pacific and majoring in Computer Science as well as minoring in Data Science. The team is currently using PROS with LemLib, so if you have any programming questions, feel free to email me at gsalazardinh@gmail.com.",
-    img: "https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending"
+    img: "/5556.jpg"
   },
   {
     name: "Aleksei Macatuno",
     role: "CAD and Build",
     desc: "Contributing to drivetrain optimization and structural modeling for competition endurance.",
-    img: "https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending"
+    img: "/5521.jpg"
   },
   {
     name: "Emily Gomez-Valle",
     role: "Notebooker",
     desc: "Maintaining the rigorous engineering design process and documentation for judges evaluation.",
-    img: "https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending"
+    img: "/5520.jpg"
   },
   {
     name: "Janna Tang",
     role: "Media Lead",
     desc: "Managing team branding, social outreach, and digital documentation of our engineering progress.",
-    img: "https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending"
+    img: "/5519.jpg"
   }
 ];
 
 const currentSponsors = [
-  { 
-    name: "Onshape", 
-    logo: "https://www.onshape.com/cdn-images/2db2486ec4e220b607223acf5f79cfe5e02d7859-216x49.svg?w=1600" 
-  },
-  { 
-    name: "Open Innovation Centers", 
-    logo: "https://www.openinnovationcenters.com/img/mark.png" 
-  },
-  { 
-    name: "MESA at UOP", 
-    logo: "https://mesa.ucop.edu/wp-content/uploads/2019/09/MESA-logo_no-tag-60px.png" 
-  }
+  { name: "Onshape", logo: "https://www.onshape.com/cdn-images/2db2486ec4e220b607223acf5f79cfe5e02d7859-216x49.svg?w=1600" },
+  { name: "MESA at UOP", logo: "https://mesa.ucop.edu/wp-content/uploads/2019/09/MESA-logo_no-tag-60px.png" },
+  { name: "Open Innovation Centers", logo: "https://www.openinnovationcenters.com/img/mark.png" }
 ];
 
 const individualSponsors = [
@@ -107,16 +103,17 @@ const individualSponsors = [
   { name: "David Jimenez", role: "Individual Sponsor" }
 ];
 
+const carouselImages = [
+  { url: "/5544.jpg", title: "Missouri Bound", subtitle: "World Championship Prep" },
+  { url: "/5540.jpg", title: "Innovation Award", subtitle: "Ez Robotics @ Rolling Robots" },
+  { url: "/5543.jpg", title: "72-Hour Sprint", subtitle: "Turning CAD to Reality" },
+  { url: "/5524.jpg", title: "Garage HQ", subtitle: "Independent VEX U Operations" }
+];
+
 // --- SUB-COMPONENTS ---
 
 const EclipseLogo = ({ className = "w-12 h-12" }) => (
-  <svg 
-    version="1.0" 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 600 600" 
-    preserveAspectRatio="xMidYMid meet"
-    className={className}
-  >
+  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" className={className}>
     <g transform="translate(0.000000,600.000000) scale(0.050000,-0.050000)" fill="currentColor" stroke="none">
       <path d="M5640 8078 c-710 -86 -1363 -534 -1674 -1148 -28 -55 -54 -104 -58-108 -4 -4 -172 -42 -373 -83 l-365 -75 770 -2 770 -2 86 168 c341 668 976 1058 1719 1057 146 -1 265 2 265 5 0 4 -75 34 -168 67 -301 109 -683 157 -972 121z m-244 -235 c5 -32 -4 -43 -33 -43 -53 0 -73 34 -42 72 33 39 67 26 75-29z m-1035 -694 c21 -26 20 -37 -6 -62 -36 -37 -75 -21 -75 31 0 65 40 81 81 31z"/>
       <path d="M6230 7826 c-519 -116 -1026 -509 -1256 -974 -89 -180 -90 -192 -18 -192 49 0 62 15 110 126 206 472 662 869 1164 1011 120 34 120 56 0 29z"/>
@@ -134,109 +131,71 @@ const EclipseLogo = ({ className = "w-12 h-12" }) => (
   </svg>
 );
 
-const InstagramFeed = ({ loading, posts }) => (
-  <section className="py-24 bg-zinc-950 border-t border-white/5">
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="flex justify-between items-end mb-12">
-        <div>
-          <h2 className="text-3xl font-bold flex items-center gap-3 italic uppercase text-white">
-            <Instagram className="text-pink-500" /> Live Feed
-          </h2>
-          <p className="text-gray-500 mt-2">Latest from @eclipse_robotics</p>
-        </div>
-        <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="text-blue-400 flex items-center gap-1 font-bold text-sm hover:underline">
-          View All <ExternalLink size={14} />
-        </a>
-      </div>
-      
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {loading ? (
-          [1, 2, 3, 4].map(i => (
-            <div key={i} className="aspect-square bg-white/5 rounded-xl animate-pulse flex items-center justify-center">
-              <Camera className="text-white/10" size={32} />
-            </div>
-          ))
-        ) : posts.length > 0 ? (
-          posts.map((post) => {
-            const isVideo = post.mediaType === 'VIDEO' || post.media_type === 'VIDEO';
-            const imageUrl = isVideo 
-              ? (post.thumbnailUrl || post.thumbnail_url || post.mediaUrl)
-              : (post.mediaUrl || post.media_url);
-            
-            return (
-              <div 
-                key={post.id} 
-                className="aspect-square bg-white/5 rounded-xl border border-white/10 overflow-hidden relative group cursor-pointer"
-                onClick={() => window.open(post.permalink || `https://www.instagram.com/p/${post.id}`, '_blank')}
-              >
-                <img 
-                  src={imageUrl} 
-                  alt="VEX U robotics" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                  onError={(e) => {
-                    e.target.src = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800';
-                  }}
-                />
-                {isVideo && (
-                  <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm p-1.5 rounded-lg z-10 border border-white/10">
-                    <Play size={14} fill="white" className="text-white" />
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                  <div className="flex items-center gap-4 text-sm font-bold text-white">
-                    <span className="flex items-center gap-1"><Heart size={16} fill="currentColor" /> {post.likeCount || ''}</span>
-                  </div>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <div className="col-span-full py-20 text-center text-zinc-600 border border-dashed border-zinc-800 rounded-2xl">
-            Feed temporarily unavailable
+const ImageCarousel = ({ inline = false }) => {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className={`relative w-full rounded-3xl overflow-hidden border border-white/10 group shadow-2xl ${inline ? 'aspect-square' : 'aspect-video'}`}>
+      {carouselImages.map((img, idx) => (
+        <div key={idx} className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${idx === active ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}>
+          <img src={img.url} className="w-full h-full object-cover" alt={img.title} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-left">
+            <h3 className="text-2xl md:text-3xl font-black uppercase italic text-white mb-1 leading-none">{img.title}</h3>
+            <p className="text-blue-400 font-black uppercase tracking-[0.2em] text-[10px] md:text-xs">{img.subtitle}</p>
           </div>
-        )}
+        </div>
+      ))}
+      <button onClick={() => setActive((prev) => (prev - 1 + carouselImages.length) % carouselImages.length)} className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/40 backdrop-blur-md rounded-full text-white hover:bg-blue-600 transition-all opacity-0 group-hover:opacity-100">
+        <ChevronLeft size={20} />
+      </button>
+      <button onClick={() => setActive((prev) => (prev + 1) % carouselImages.length)} className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/40 backdrop-blur-md rounded-full text-white hover:bg-blue-600 transition-all opacity-0 group-hover:opacity-100">
+        <ChevronRight size={20} />
+      </button>
+      <div className="absolute top-6 right-6 flex gap-2">
+        {carouselImages.map((_, idx) => (
+          <button key={idx} onClick={() => setActive(idx)} className={`w-1.5 h-1.5 rounded-full transition-all ${idx === active ? 'bg-blue-500 w-4' : 'bg-white/20'}`} />
+        ))}
       </div>
     </div>
-  </section>
-);
+  );
+};
 
 const SponsorsSection = ({ onContact }) => (
   <div className="space-y-16">
-    {/* Corporate Sponsors */}
-    <div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-        {currentSponsors.map((sponsor, i) => (
-          <div key={i} className="group p-8 bg-zinc-900/30 border border-white/5 rounded-3xl flex flex-col items-center justify-center hover:bg-zinc-900/50 hover:border-blue-500/20 transition-all cursor-default shadow-xl text-center">
-            <div className="h-16 flex items-center justify-center mb-4">
-               <img src={sponsor.logo} alt={sponsor.name} className="max-h-full max-w-full grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all" />
-            </div>
-            <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-blue-500 transition-colors leading-tight">{sponsor.name}</div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {currentSponsors.map((sponsor, i) => (
+        <div key={i} className="group p-8 bg-zinc-900/30 border border-white/5 rounded-3xl flex flex-col items-center justify-center hover:bg-zinc-900/50 hover:border-blue-500/20 transition-all cursor-default shadow-xl text-center">
+          <div className="h-10 flex items-center justify-center mb-4">
+             <img src={sponsor.logo} alt={sponsor.name} className="max-h-full max-w-full grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all" />
           </div>
-        ))}
-        <button 
-          onClick={onContact}
-          className="p-8 border border-dashed border-zinc-800 rounded-3xl flex flex-col items-center justify-center text-zinc-600 hover:text-blue-400 hover:border-blue-500/40 transition-all group"
-        >
-          <Sparkles size={24} className="mb-2 group-hover:scale-110 transition-transform" />
-          <div className="text-[10px] font-black uppercase tracking-widest text-center">Support Our Journey</div>
-        </button>
-      </div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-blue-500 transition-colors leading-tight">{sponsor.name}</div>
+        </div>
+      ))}
+      <button onClick={onContact} className="p-8 border border-dashed border-zinc-800 rounded-3xl flex flex-col items-center justify-center text-zinc-600 hover:text-blue-400 hover:border-blue-500/40 transition-all group">
+        <Sparkles size={24} className="mb-2 group-hover:scale-110 transition-transform" />
+        <div className="text-[10px] font-black uppercase tracking-widest text-center">Support Our Journey</div>
+      </button>
     </div>
 
-    {/* Individual Sponsors / Thanks To Section */}
     <div className="pt-12 border-t border-white/5">
-      <div className="flex items-center gap-3 mb-8 justify-center md:justify-start">
+      <div className="flex items-center gap-3 mb-8 justify-center md:justify-start text-white">
         <Heart className="text-pink-500" size={20} />
-        <h3 className="text-xl font-black uppercase italic text-white tracking-tight">Special Thanks to</h3>
+        <h3 className="text-xl font-black uppercase italic tracking-tight">Special Thanks to</h3>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center md:text-left">
         {individualSponsors.map((person, i) => (
           <div key={i} className="p-4 bg-zinc-900/20 border border-white/5 rounded-2xl flex items-center gap-4 group hover:border-pink-500/20 transition-all">
-            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-600 group-hover:text-pink-500 transition-colors">
-              <User size={18} />
-            </div>
+            <User size={18} className="text-zinc-600 shrink-0 group-hover:text-pink-500 transition-colors" />
             <div>
-              <div className="text-sm font-bold text-white uppercase italic">{person.name}</div>
+              <div className="text-sm font-bold text-white uppercase italic leading-tight">{person.name}</div>
               <div className="text-[9px] text-zinc-600 font-black uppercase tracking-widest leading-none mt-1">{person.role}</div>
             </div>
           </div>
@@ -246,7 +205,44 @@ const SponsorsSection = ({ onContact }) => (
   </div>
 );
 
-// --- MAIN APP ---
+const InstagramFeed = ({ loading, posts }) => (
+  <section className="py-24 bg-zinc-950 border-t border-white/5">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="flex justify-between items-end mb-12 text-center md:text-left">
+        <div className="w-full md:w-auto">
+          <h2 className="text-3xl font-bold flex items-center justify-center md:justify-start gap-3 italic uppercase text-white">
+            <Instagram className="text-pink-500" /> Live Feed
+          </h2>
+          <p className="text-gray-500 mt-2 text-sm">Latest from @eclipse_robotics</p>
+        </div>
+        <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="hidden md:flex text-blue-400 items-center gap-1 font-bold text-sm hover:underline">
+          View All <ExternalLink size={14} />
+        </a>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {loading ? (
+          [1, 2, 3, 4].map(i => <div key={i} className="aspect-square bg-white/5 rounded-xl animate-pulse flex items-center justify-center border border-white/5" />)
+        ) : posts.length > 0 ? (
+          posts.map((post) => {
+            const imageUrl = post.mediaType === 'VIDEO' || post.media_type === 'VIDEO'
+              ? (post.thumbnailUrl || post.thumbnail_url || post.mediaUrl)
+              : (post.mediaUrl || post.media_url);
+            return (
+              <div key={post.id} className="aspect-square bg-white/5 rounded-xl border border-white/10 overflow-hidden relative group cursor-pointer" onClick={() => window.open(post.permalink || `https://www.instagram.com/p/${post.id}`, '_blank')}>
+                <img src={imageUrl} alt="VEX U robotics" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white text-[10px] font-black uppercase">
+                  <span className="flex items-center gap-1"><Heart size={14} fill="currentColor" /> {post.likeCount || ''}</span>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div className="col-span-full py-20 text-center text-zinc-600 border border-dashed border-zinc-800 rounded-2xl italic">Feed restricted / offline</div>
+        )}
+      </div>
+    </div>
+  </section>
+);
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -255,26 +251,17 @@ const App = () => {
   const [igPosts, setIgPosts] = useState([]);
   const [loadingIg, setLoadingIg] = useState(true);
 
-  const BEHOLD_URL = "https://feeds.behold.so/t2cK9m9tg80BDruckAjN"; 
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    
     const fetchInstagram = async () => {
       try {
-        const response = await fetch(BEHOLD_URL);
-        if (!response.ok) throw new Error('Failed to fetch');
+        const response = await fetch("https://feeds.behold.so/t2cK9m9tg80BDruckAjN");
         const data = await response.json();
-        const posts = Array.isArray(data) ? data : (data.posts || []);
-        setIgPosts(posts.slice(0, 4));
-      } catch (error) {
-        console.error("IG Feed Error:", error);
-      } finally {
-        setLoadingIg(false);
-      }
+        setIgPosts((data.posts || data).slice(0, 4));
+      } catch (e) { console.error(e); } 
+      finally { setLoadingIg(false); }
     };
-
     fetchInstagram();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -284,45 +271,34 @@ const App = () => {
     textArea.value = TEAM_EMAIL;
     document.body.appendChild(textArea);
     textArea.select();
-    try {
-      document.execCommand('copy');
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Copy failed', err);
-    }
+    document.execCommand('copy');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
     document.body.removeChild(textArea);
   };
 
-  const Navigation = () => (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center space-x-2 cursor-pointer group" onClick={() => { setActiveTab('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }}>
-          <EclipseLogo className="h-10 w-auto text-white group-hover:text-blue-400 transition-colors" />
-          <span className="hidden sm:block text-xl font-black tracking-tighter ml-2 italic text-white uppercase">VEX <span className="text-blue-500">U</span></span>
-        </div>
-        <div className="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase">
-          {['home', 'team', 'sponsorship', 'contact'].map((item) => (
-            <button key={item} onClick={() => { setActiveTab(item); window.scrollTo({top: 0, behavior: 'smooth'}); }} className={`transition-colors ${activeTab === item ? 'text-blue-400' : 'text-gray-400 hover:text-white'}`}>
-              {item === 'team' ? 'Personnel' : item.charAt(0).toUpperCase() + item.slice(1)}
-            </button>
-          ))}
-        </div>
-        <div className="flex items-center gap-4">
-          <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
-            <Instagram size={20} />
-          </a>
-          <button onClick={() => { setActiveTab('sponsorship'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded font-black text-[10px] uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-blue-900/20">
-            Sponsor
-          </button>
-        </div>
-      </div>
-    </nav>
-  );
-
   return (
     <div className="min-h-screen bg-black text-white selection:bg-blue-500 selection:text-white font-sans overflow-x-hidden">
-      <Navigation />
+      {/* Navigation */}
+      <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center space-x-2 cursor-pointer group" onClick={() => { setActiveTab('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }}>
+            <EclipseLogo className="h-10 w-auto text-white group-hover:text-blue-400 transition-colors" />
+            <span className="hidden sm:block text-xl font-black tracking-tighter ml-2 italic text-white uppercase">VEX <span className="text-blue-500">U</span></span>
+          </div>
+          <div className="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase">
+            {['home', 'team', 'sponsorship', 'contact'].map((item) => (
+              <button key={item} onClick={() => { setActiveTab(item); window.scrollTo({top: 0, behavior: 'smooth'}); }} className={`transition-colors ${activeTab === item ? 'text-blue-400' : 'text-gray-400 hover:text-white'}`}>
+                {item === 'team' ? 'Personnel' : item.charAt(0).toUpperCase() + item.slice(1)}
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors"><Instagram size={20} /></a>
+            <button onClick={() => { setActiveTab('sponsorship'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded font-black text-[10px] uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-blue-900/20">Sponsor</button>
+          </div>
+        </div>
+      </nav>
       
       <main>
         {activeTab === 'home' && (
@@ -331,88 +307,85 @@ const App = () => {
             <div className="relative min-h-screen flex items-center justify-center pt-20 text-center">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at(50%_50%),_rgba(30,58,138,0.25),transparent_70%)]"></div>
               <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-8 backdrop-blur-sm">
-                  <span className="text-xs font-semibold text-blue-400 tracking-widest uppercase italic flex items-center gap-2">
-                    <Sparkles size={14} /> 2026 VEX Worlds Qualified
-                  </span>
+                <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-8 backdrop-blur-sm text-center justify-center text-white">
+                  <Sparkles size={14} className="text-blue-400 animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] italic text-blue-400">2026 VEX Worlds Qualified // Missouri</span>
                 </div>
                 <div className="flex justify-center mb-8">
                   <EclipseLogo className="w-72 md:w-96 h-auto text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]" />
                 </div>
-                <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase italic leading-tight text-white">
-                  Total <span className="text-blue-500">Engineering</span>
-                </h1>
-                <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed italic text-center">
-                  Building the future through VEX U Competitions. We're headed to the World Championship in Missouri and we want you with us.
-                </p>
+                <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase italic leading-tight text-white">Total <span className="text-blue-500">Engineering</span></h1>
+                <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed italic text-center">Building the future through VEX U Competitions. We're headed to the World Championship in Missouri and we want you with us.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button onClick={() => { setActiveTab('team'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-white text-black font-black px-10 py-4 rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-all active:scale-95 shadow-xl w-full sm:w-auto justify-center uppercase tracking-widest text-xs">
-                    Meet the Team <ChevronRight size={20} />
-                  </button>
-                  <button onClick={() => { setActiveTab('sponsorship'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-blue-600 border border-blue-500/20 text-white font-black px-10 py-4 rounded-lg flex items-center gap-2 hover:bg-blue-500 transition-all active:scale-95 w-full sm:w-auto justify-center shadow-lg shadow-blue-900/40 uppercase tracking-widest text-xs">
-                    Sponsor Our Journey
-                  </button>
+                  <button onClick={() => { setActiveTab('team'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-white text-black font-black px-10 py-4 rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-all active:scale-95 shadow-xl w-full sm:w-auto justify-center uppercase tracking-widest text-[10px]">Meet the Team <ChevronRight size={20} /></button>
+                  <button onClick={() => { setActiveTab('sponsorship'); window.scrollTo({top: 0, behavior: 'smooth'}); }} className="bg-blue-600 border border-blue-500/20 text-white font-black px-10 py-4 rounded-lg flex items-center gap-2 hover:bg-blue-500 transition-all active:scale-95 w-full sm:w-auto justify-center shadow-lg shadow-blue-900/40 uppercase tracking-widest text-[10px]">Sponsor Our Journey</button>
                 </div>
               </div>
             </div>
 
-            {/* Achievements Section */}
-            <section className="py-24 bg-black">
-              <div className="max-w-7xl mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                  <div className="max-w-2xl text-center md:text-left">
-                    <h2 className="text-4xl font-black mb-4 uppercase italic tracking-tight text-white">Championship Performance</h2>
-                    <p className="text-gray-400 text-lg leading-relaxed italic">Our team has officially secured a spot at the VEX Robotics World Championship in Missouri.</p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
-                    {[
-                      { val: "2026", label: "Worlds Qual." },
-                      { val: "10+", label: "Awards" },
-                      { val: "2X", label: "State Qual." },
-                      { val: "U.S.", label: "Open Qual." }
-                    ].map((stat, i) => (
-                      <div key={i} className="text-center p-4 rounded-2xl bg-white/5 border border-white/10">
-                        <div className="text-2xl font-black text-blue-400 uppercase">{stat.val}</div>
-                        <div className="text-[9px] text-gray-500 uppercase tracking-widest font-black">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
+            {/* Hall of Fame Awards Section */}
+            <section className="py-24 bg-black border-y border-white/5 relative overflow-hidden text-center md:text-left">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at(20%_30%),_rgba(30,58,138,0.1),transparent_50%)]"></div>
+              <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="flex flex-col md:flex-row items-center gap-12 mb-20">
+                   <div className="flex-1 text-center md:text-left">
+                     <div className="inline-flex items-center gap-2 text-blue-500 mb-4 uppercase font-black tracking-[0.4em] text-xs italic"><Award size={20} /> Global Excellence</div>
+                     <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter text-white mb-6 leading-none">The Top <span className="text-blue-500">1%</span></h2>
+                     <p className="text-zinc-400 text-xl font-medium leading-relaxed italic max-w-2xl mx-auto md:mx-0">Eclipse Robotics is honored to be one of only <span className="text-white font-bold">140 teams globally</span> invited to join the World Championship in Missouri. We represent the pinnacle of California collegiate engineering performance.</p>
+                   </div>
+                   <div className="p-12 bg-blue-600/10 border border-blue-500/20 rounded-[3rem] text-center shadow-[0_0_50px_rgba(30,58,138,0.3)] min-w-[280px]">
+                      <div className="text-7xl font-black italic text-white mb-2 leading-none">1/140</div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 italic text-center">Total Global Invitations</div>
+                   </div>
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {[
-                    { 
-                      icon: <Cpu />, 
-                      title: "Machined Precision", 
-                      desc: "Building VEX U robots with custom-CADing every millimeter of our robot and manufacturing it ourselves on a shoestring to outperform standard components." 
-                    },
-                    { 
-                      icon: <Zap />, 
-                      title: "Intelligent Drive", 
-                      desc: "Custom manufactured odom and pid for precision and weight reduction." 
-                    },
-                    { 
-                      icon: <Trophy />, 
-                      title: "Global Stage", 
-                      desc: "Representing California collegiate engineering at the world's largest robotics competition." 
-                    }
-                  ].map((item, i) => (
-                    <div key={i} className="p-10 rounded-3xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all group">
-                      <div className="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform">{item.icon}</div>
-                      <h3 className="text-2xl font-bold mb-3 italic uppercase text-white">{item.title}</h3>
-                      <p className="text-gray-500 leading-relaxed font-medium italic">{item.desc}</p>
-                    </div>
-                  ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                   {[
+                     { icon: <Medal size={32} />, title: "Nationals Gold", desc: "Winners of the High Stakes National Championship during our senior year." },
+                     { icon: <Medal size={32} />, title: "Innovation Award", desc: "Recognized for custom mechanical design at the LA Regional Ez Robotics @ Rolling Robots." },
+                     { icon: <Star size={32} />, title: "10+ Seasonal Awards", desc: "Consistently ranked among top engineering teams across previous seasons." },
+                     { icon: <Star size={32} />, title: "VEX Worlds 2026", desc: "Elite final stage qualification in Missouri." }
+                   ].map((award, i) => (
+                     <div key={i} className="p-8 bg-zinc-900/40 border border-white/5 rounded-3xl hover:border-blue-500/30 transition-all group text-left">
+                        <div className="text-blue-500 mb-6 group-hover:scale-110 transition-transform">{award.icon}</div>
+                        <h4 className="text-xl font-black uppercase italic text-white mb-2 tracking-tight leading-tight">{award.title}</h4>
+                        <p className="text-zinc-500 text-xs italic font-medium leading-relaxed">{award.desc}</p>
+                     </div>
+                   ))}
                 </div>
               </div>
+            </section>
+
+            {/* Our Story & Carousel Combined Section */}
+            <section className="py-24 bg-zinc-950 relative overflow-hidden border-b border-white/5">
+               <div className="max-w-7xl mx-auto px-6 relative z-10">
+                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                   <div className="text-center md:text-left">
+                     <div className="inline-flex items-center gap-3 text-blue-500 mb-6 justify-center md:justify-start">
+                        <History size={24} />
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] italic">Origin Record</span>
+                     </div>
+                     <h2 className="text-5xl font-black uppercase italic tracking-tighter text-white mb-8 leading-none">Our <span className="text-blue-500">Story</span></h2>
+                     <div className="space-y-6 text-zinc-400 text-lg leading-relaxed italic">
+                       <p>Eclipse Robotics began as seniors in high school deciding that graduation wouldn't be the end of our journey. Despite heading to different colleges, we committed to competing together by creating our own separate garage-based team.</p>
+                       <p>We proved the dream was real by winning <span className="text-white font-bold">Nationals Gold</span> during the High Stakes season. This year, transitioning to VEX U, we faced our toughest challenge: no funding and no practice field. We spent months purely in CAD, refining our custom drivetrain until just 3 days before our competition.</p>
+                       <p>In a final sprint, we acquired a field from a middle school team and turned our digital models into a physical reality in just 72 hours. We drove to LA for the <span className="text-white font-bold">Ez Robotics @ Rolling Robots</span> event, brought home the Innovation Award, and officially qualified for the World Championships in Missouri.</p>
+                     </div>
+                   </div>
+                   <div className="relative flex items-center justify-center h-full">
+                      <ImageCarousel inline={true} />
+                      <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-600/20 blur-3xl rounded-full"></div>
+                      <div className="absolute -top-6 -left-6 w-32 h-32 bg-purple-600/10 blur-3xl rounded-full"></div>
+                   </div>
+                 </div>
+               </div>
             </section>
 
             {/* Homepage Sponsors Section */}
             <section className="py-24 border-t border-white/5 bg-zinc-950/50">
               <div className="max-w-7xl mx-auto px-6">
-                <div className="flex items-center gap-3 mb-12 justify-center md:justify-start">
+                <div className="flex items-center gap-3 mb-12 justify-center md:justify-start text-white">
                    <Award className="text-blue-500" size={24} />
-                   <h3 className="text-2xl font-black uppercase italic text-white tracking-tight">Our 2026 Partners</h3>
+                   <h3 className="text-2xl font-black uppercase italic tracking-tight leading-none text-center">Our 2026 Partners</h3>
                 </div>
                 <SponsorsSection onContact={() => setActiveTab('contact')} />
               </div>
@@ -423,176 +396,106 @@ const App = () => {
         )}
         
         {activeTab === 'team' && (
-          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6">
-            <h2 className="text-6xl font-black mb-12 uppercase italic tracking-tighter text-white">The <span className="text-blue-500">Collective</span></h2>
-            <p className="text-gray-400 text-xl max-w-3xl mb-16 leading-relaxed font-medium italic text-center mx-auto">
-              Founded as a high school team, we transitioned to the collegiate VEX U division to continue 
-              challenging our technical skills as future engineers.
-            </p>
-            
-            {/* Team Grid 3x2 with temporary blank images */}
+          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center sm:text-left">
+            <h2 className="text-6xl font-black mb-12 uppercase italic tracking-tighter text-white text-center leading-none">The <span className="text-blue-500">Collective</span></h2>
+            <p className="text-gray-400 text-xl max-w-3xl mb-16 leading-relaxed font-medium italic text-center mx-auto">Meet the specialists driving Eclipse Robotics toward global excellence in Missouri.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
               {teamMembers.map((member, idx) => (
-                <div key={idx} className="group p-6 bg-zinc-900/40 rounded-3xl border border-white/5 hover:border-blue-500/20 transition-all">
+                <div key={idx} className="group p-6 bg-zinc-900/40 rounded-3xl border border-white/5 hover:border-blue-500/20 transition-all text-left">
                   <div className="aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-zinc-800 flex items-center justify-center">
-                    <User className="text-zinc-700 group-hover:text-blue-500 transition-colors" size={64} />
+                    <img src={member.img} alt={member.name} className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110 opacity-60 group-hover:opacity-100" onError={(e) => { e.target.src = 'https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending'; }} />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-1 uppercase italic">{member.name}</h3>
-                  <div className="text-blue-500 text-xs font-black uppercase tracking-widest mb-4 italic">{member.role}</div>
-                  <p className="text-gray-500 text-sm leading-relaxed italic">{member.desc}</p>
+                  <h3 className="text-xl font-bold text-white mb-1 uppercase italic leading-tight">{member.name}</h3>
+                  <div className="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-4 italic">{member.role}</div>
+                  <p className="text-zinc-500 text-sm leading-relaxed italic">{member.desc}</p>
                 </div>
               ))}
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="p-12 bg-zinc-900/40 rounded-3xl border border-white/5 hover:border-blue-500/20 transition-all group relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8 text-blue-900/20"><Cpu size={120} /></div>
-                <h3 className="text-4xl font-bold mb-4 flex items-center gap-4 text-blue-400 uppercase italic">Mechanical</h3>
-                <p className="text-gray-400 text-lg leading-relaxed relative z-10 italic">
-                  Precision-focused design cycle. We leverage CAD conceptualization to build final 
-                  machined VEX U robots that exceed industrial standards.
-                </p>
+                <h3 className="text-4xl font-bold mb-4 flex items-center gap-4 text-blue-400 uppercase italic text-left">Mechanical</h3>
+                <p className="text-gray-400 text-lg leading-relaxed relative z-10 italic text-left">Precision-focused design cycle. We leverage CAD conceptualization to build final machined VEX U robots that exceed industrial standards.</p>
               </div>
               <div className="p-12 bg-zinc-900/40 rounded-3xl border border-white/5 hover:border-purple-500/20 transition-all group relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8 text-purple-900/20"><Zap size={120} /></div>
-                <h3 className="text-4xl font-bold mb-4 flex items-center gap-4 text-purple-400 uppercase italic">Programming</h3>
-                <p className="text-gray-400 text-lg leading-relaxed relative z-10 italic">
-                  Driving intelligence through C++. Robust autonomous routines and sensor-driven 
-                  assist systems using the PROS environment.
-                </p>
+                <h3 className="text-4xl font-bold mb-4 flex items-center gap-4 text-purple-400 uppercase italic text-left">Programming</h3>
+                <p className="text-gray-400 text-lg leading-relaxed relative z-10 italic text-left">Driving intelligence through C++. Robust autonomous routines and sensor-driven assist systems using the PROS environment.</p>
               </div>
             </div>
           </div>
         )}
 
         {activeTab === 'sponsorship' && (
-          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16 text-center md:text-left">
+          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center md:text-left">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
               <div>
-                <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/20 px-4 py-1 rounded-full mb-4">
+                <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/20 px-4 py-1 rounded-full mb-4 text-white">
                   <Globe size={14} className="text-blue-400" />
-                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 italic">Official Worlds Qualifier</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest italic">Official 2026 Missouri Expedition</span>
                 </div>
                 <h2 className="text-6xl font-black uppercase italic mb-4 text-white tracking-tighter leading-tight">Worlds <span className="text-blue-500">Fundraising</span></h2>
-                <p className="text-gray-400 max-w-xl font-medium italic text-lg leading-relaxed">
-                  Help empower student innovators as we prepare to compete on the global stage in Missouri. 
-                  We have officially qualified and are raising funds to cover registration, flights, and technical development.
-                </p>
+                <p className="text-gray-400 max-w-xl font-medium italic text-lg leading-relaxed">Help empower student innovators as we prepare to compete in Missouri. Funds offset registration, team flights, and hardware logistics.</p>
               </div>
               <div className="flex flex-col items-center md:items-end gap-4">
                 <div className="bg-blue-600/10 border border-blue-500/20 px-6 py-3 rounded-full">
-                  <span className="text-blue-400 font-black tracking-widest text-sm uppercase italic">Target: $10,000</span>
+                  <span className="text-blue-400 font-black tracking-widest text-sm uppercase italic">Budget: $10,000</span>
                 </div>
-                <a 
-                  href={PACKET_PDF_URL} 
-                  download="Eclipse_Robotics_Sponsorship_Packet.pdf"
-                  className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-xl font-black hover:bg-gray-200 transition-all text-xs uppercase tracking-widest shadow-xl active:scale-95 no-underline"
-                >
+                <a href={PACKET_PDF_URL} download className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-xl font-black hover:bg-zinc-200 transition-all text-[10px] uppercase tracking-widest shadow-xl active:scale-95 no-underline">
                   <Download size={18} /> Download Packet
                 </a>
               </div>
             </div>
-
-            {/* Current Sponsors Section */}
             <div className="mb-24 py-16 border-y border-white/5">
-              <div className="flex items-center gap-3 mb-12 justify-center md:justify-start">
+              <div className="flex items-center gap-3 mb-12 justify-center md:justify-start text-white">
                  <Award className="text-blue-500" size={24} />
-                 <h3 className="text-2xl font-black uppercase italic text-white tracking-tight">Our Current Partners</h3>
+                 <h3 className="text-2xl font-black uppercase italic tracking-tight">Our Current Partners</h3>
               </div>
               <SponsorsSection onContact={() => setActiveTab('contact')} />
             </div>
-
-            {/* Benefits Preview */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24 text-center sm:text-left">
               {[
-                { title: "Visibility", items: ["Tournament Presence", "Team Apparel Logos", "Social Media Outreach"] },
-                { title: "Impact", items: ["Technical R&D", "Youth STEM Workshops", "Regional Leadership"] },
-                { title: "Allocation", items: ["35% Flights & Travel", "25% Robot Systems", "15% Registration Fees", "10% Outreach"] },
-                { title: "Recognition", items: ["Robot Labeling", "Event Banners", "Reveal Features"] }
+                { title: "Team Flights", val: "$3,500", desc: "Air travel for 6 members to Missouri." },
+                { title: "Registration", val: "$1,500", desc: "Official World Championship entry fees." },
+                { title: "Hotel & Logistics", val: "$2,500", desc: "Accommodation and local transit in Missouri." },
+                { title: "Hardware/Build", val: "$2,500", desc: "Custom CNC parts and sensor integration." }
               ].map((card, i) => (
-                <div key={i} className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 relative group overflow-hidden">
-                  <div className="absolute -top-4 -right-4 text-white/5 group-hover:text-blue-500/10 transition-colors font-black text-6xl italic leading-none">0{i+1}</div>
-                  <h4 className="text-blue-400 font-black text-sm uppercase tracking-widest mb-6 italic">{card.title}</h4>
-                  <ul className="space-y-3 text-xs text-zinc-400 font-medium leading-relaxed italic text-center">
-                    {card.items.map((it, idx) => (
-                      <li key={idx} className="flex items-center gap-2 justify-center"><div className="w-1 h-1 bg-blue-500 rounded-full" /> {it}</li>
-                    ))}
-                  </ul>
+                <div key={i} className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 relative group overflow-hidden text-left">
+                  <div className="absolute -top-4 -right-4 text-white/5 font-black text-6xl italic leading-none">0{i+1}</div>
+                  <h4 className="text-blue-400 font-black text-[10px] uppercase tracking-widest mb-2 italic leading-none">{card.title}</h4>
+                  <div className="text-3xl font-black text-white mb-2 italic leading-none">{card.val}</div>
+                  <p className="text-[10px] text-zinc-500 font-medium italic leading-relaxed">{card.desc}</p>
                 </div>
               ))}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-10 bg-zinc-900/40 rounded-[2rem] border border-white/5 group hover:border-blue-500/20 transition-colors">
-                <h3 className="text-2xl font-black mb-4 uppercase italic text-white flex items-center gap-3">
-                  <Plane className="text-blue-500" /> VEX Worlds Logistics
-                </h3>
-                <p className="text-gray-400 mb-6 font-medium leading-relaxed italic text-center">
-                  Registration for Worlds and international flights for our team collective represent our primary seasonal expenses.
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {["Flights", "Registration Fees", "Hotel", "Shipping"].map(item => (
-                    <span key={item} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-blue-400 italic">{item}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="p-10 bg-blue-600/10 rounded-[2rem] border border-blue-500/20 group hover:bg-blue-600/15 transition-all">
-                <h3 className="text-2xl font-black mb-4 uppercase italic text-white flex items-center gap-3">
-                  <Mail className="text-blue-500" /> How to Support
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-blue-500 flex-shrink-0" size={20} />
-                    <p className="text-sm text-zinc-400 font-medium italic text-center w-full">Checks to <span className="text-white font-bold">Eclipse Robotics</span> or via our secure portal.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-blue-500 flex-shrink-0" size={20} />
-                    <p className="text-sm text-zinc-400 font-medium italic text-center w-full">Every contribution directly supports our journey to VEX Worlds in Missouri.</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         )}
 
         {activeTab === 'contact' && (
           <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-6xl font-black mb-6 uppercase italic tracking-tighter text-white">Get In <span className="text-blue-500">Touch</span></h2>
-            <p className="text-gray-500 mb-16 max-w-xl mx-auto font-medium text-lg leading-relaxed italic text-center">
-              Reach out to discuss partnerships, workshops, or general collegiate inquiries.
-            </p>
+            <h2 className="text-6xl font-black mb-6 uppercase italic tracking-tighter text-white leading-none text-center">Get In <span className="text-blue-500">Touch</span></h2>
+            <p className="text-gray-500 mb-16 max-w-xl mx-auto font-medium text-lg leading-relaxed italic text-center"> Reach out for sponsorship, workshops, or inquiries.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
-              <div className="p-12 bg-zinc-900/40 rounded-[2rem] border border-white/5 group hover:border-blue-500/40 transition-all relative overflow-hidden">
+              <div className="p-12 bg-zinc-900/40 border border-white/5 rounded-[2.5rem] border border-white/5 group hover:border-blue-500/40 transition-all relative overflow-hidden text-left text-white">
                 <Mail className="text-blue-400 mb-6 group-hover:scale-110 transition-transform" size={48} />
-                <div className="font-black text-3xl mb-2 italic text-white uppercase tracking-tighter">Inquiries</div>
-                <div className="text-gray-400 text-lg font-medium mb-8">{TEAM_EMAIL}</div>
+                <div className="font-black text-3xl mb-2 italic uppercase tracking-tighter leading-tight">Inquiries</div>
+                <div className="text-gray-400 text-lg font-medium mb-8 leading-none">{TEAM_EMAIL}</div>
                 <div className="space-y-2 text-zinc-500 text-sm italic font-medium">
                   <div className="flex items-center gap-2"><Users size={14}/> {CONTACT_PERSON}</div>
                   <div className="flex items-center gap-2"><Phone size={14}/> {CONTACT_PHONE}</div>
                 </div>
-                
                 <div className="flex gap-3 mt-8">
-                  <a href={`mailto:${TEAM_EMAIL}`} className="bg-blue-600 text-white px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 transition-all active:scale-95 shadow-lg shadow-blue-900/20">
-                    Send Email
-                  </a>
-                  <button 
-                    onClick={copyToClipboard}
-                    className="bg-white/5 text-white border border-white/10 px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2"
-                  >
-                    {copied ? <Check size={14} /> : <Copy size={14} />}
-                    {copied ? 'Copied' : 'Copy Email'}
+                  <a href={`mailto:${TEAM_EMAIL}`} className="bg-blue-600 text-white px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 transition-all active:scale-95 shadow-lg shadow-blue-900/20 text-white no-underline text-center">Send Email</a>
+                  <button onClick={copyToClipboard} className="bg-white/5 text-white border border-white/10 px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2 text-white">
+                    {copied ? <Check size={14} /> : <Copy size={14} />} {copied ? 'Copied' : 'Copy Email'}
                   </button>
                 </div>
               </div>
-
-              <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="p-12 bg-zinc-900/40 rounded-[2rem] border border-white/5 hover:border-pink-500/40 transition-all group relative overflow-hidden">
+              <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="p-12 bg-zinc-900/40 border border-white/5 hover:border-pink-500/40 transition-all group relative overflow-hidden text-center sm:text-left flex flex-col justify-center text-white no-underline">
                 <Instagram className="text-pink-500 mb-6 group-hover:scale-110 transition-transform" size={48} />
-                <div className="font-black text-3xl mb-2 italic text-white uppercase tracking-tighter">Social Feed</div>
-                <div className="text-gray-400 text-xl font-medium italic">@eclipse_robotics</div>
-                <div className="mt-8 text-pink-500 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                  Follow the progress <ChevronRight size={16} />
-                </div>
+                <div className="font-black text-3xl mb-2 italic uppercase tracking-tighter leading-tight">Social Feed</div>
+                <div className="text-gray-400 text-xl font-medium italic mb-2 leading-none">@eclipse_robotics</div>
+                <div className="mt-4 text-pink-500 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">Follow progress <ChevronRight size={16} /></div>
               </a>
             </div>
           </div>
@@ -600,12 +503,10 @@ const App = () => {
       </main>
 
       <footer className="py-20 bg-zinc-950 border-t border-white/5 mt-20">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left text-white">
           <div className="flex flex-col items-center md:items-start gap-4">
             <EclipseLogo className="h-10 w-auto text-white" />
-            <p className="text-zinc-600 text-[9px] font-black tracking-[0.5em] uppercase italic leading-none">
-              California Collegiate VEX U Collective // © 2026
-            </p>
+            <p className="text-zinc-600 text-[9px] font-black tracking-[0.5em] uppercase italic leading-none">California Collegiate Collective // © 2026</p>
           </div>
           <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 text-zinc-500 text-[10px] font-black uppercase tracking-widest italic">
              <button onClick={() => setActiveTab('home')} className="hover:text-blue-500 transition-colors">Home</button>
@@ -613,7 +514,7 @@ const App = () => {
              <button onClick={() => setActiveTab('sponsorship')} className="hover:text-blue-500 transition-colors">Sponsorship</button>
              <button onClick={() => setActiveTab('contact')} className="hover:text-blue-500 transition-colors">Contact</button>
           </div>
-          <div className="flex gap-6 text-zinc-400">
+          <div className="flex gap-8 text-zinc-400 text-center">
              <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors"><Instagram size={24} /></a>
              <button onClick={() => setActiveTab('team')} className="hover:text-white transition-colors"><Trophy size={24} /></button>
           </div>
