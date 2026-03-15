@@ -109,7 +109,7 @@ const individualSponsors = [
 
 const carouselImages = [
   { url: "/1130148309479722128.png", title: "Worlds Bound", subtitle: "World Championship Prep" },
-  { url: "/5843480688071423325", title: "Innovation Excellence", subtitle: "Ez Robotics VEX U Qualifier" },
+  { url: "/5843480688071423325.png", title: "Innovation Excellence", subtitle: "Ez Robotics VEX U Qualifier" },
   { url: "/5543.jpg", title: "72-Hour Sprint", subtitle: "Turning digital designs into reality" },
   { url: "/5524.jpg", title: "Garage HQ", subtitle: "Independent VEX U Operations" }
 ];
