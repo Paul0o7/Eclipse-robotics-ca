@@ -421,11 +421,9 @@ const App = () => {
                   <span className="text-blue-400 font-black tracking-widest text-sm uppercase italic text-white">Budget: $10,000</span>
                 </div>
                 <div className="flex gap-4 text-white">
-                  <a 
-                    href={PACKET_PDF_URL} 
-                    download 
-                    className="px-8 py-4 bg-white text-black font-black uppercase italic text-[10px] tracking-widest flex items-center gap-3 hover:bg-zinc-200 transition-all shadow-xl active:scale-95 no-underline text-white text-black text-black"
-                  >
+                  <a href={PACKET_PDF_URL} download className="px-8 py-4 bg-blue-600 text-white font-black uppercase italic text-[10px] tracking-widest flex items-center gap-3 hover:bg-blue-500 transition-all shadow-xl active:scale-95 no-underline">
+  <Download size={18} /> Download Packet
+</a>
                     <Download size={18} /> Download Packet
                   </a>
                   <button onClick={() => window.open(ZEFFY_DONATE_URL, '_blank')} className="bg-blue-600 border border-blue-500/20 text-white font-black px-8 py-4 rounded-lg flex items-center gap-2 hover:bg-blue-500 transition-all active:scale-95 shadow-lg shadow-blue-900/40 uppercase tracking-widest text-[10px] text-white">Donate via Zeffy</button>
