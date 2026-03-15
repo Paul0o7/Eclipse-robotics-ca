@@ -41,7 +41,7 @@ import {
 
 /**
  * Eclipse Robotics VEX U Website
- * Final Build: Missouri World Championship 2026 Edition
+ * Final Build: Worlds Bound // 2026 Edition
  */
 
 // --- SHARED DATA ---
@@ -108,9 +108,9 @@ const individualSponsors = [
 ];
 
 const carouselImages = [
-  { url: "/5544.jpg", title: "Missouri Bound", subtitle: "World Championship Prep" },
-  { url: "/5540.jpg", title: "Innovation Excellence", subtitle: "Ez Robotics @ Rolling Robots" },
-  { url: "/5543.jpg", title: "72-Hour Sprint", subtitle: "Turning CAD to Reality" },
+  { url: "/5544.jpg", title: "Worlds Bound", subtitle: "World Championship Prep" },
+  { url: "/5540.jpg", title: "Innovation Excellence", subtitle: "Ez Robotics VEX U Qualifier" },
+  { url: "/5543.jpg", title: "72-Hour Sprint", subtitle: "Turning digital designs into reality" },
   { url: "/5524.jpg", title: "Garage HQ", subtitle: "Independent VEX U Operations" }
 ];
 
@@ -137,7 +137,6 @@ const EclipseLogo = ({ className = "w-12 h-12" }) => (
 
 const ImageCarousel = ({ inline = false }) => {
   const [active, setActive] = useState(0);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % carouselImages.length);
@@ -185,7 +184,7 @@ const SponsorsSection = ({ onContact }) => (
         <Heart className="text-pink-500" size={20} />
         <h3 className="text-xl font-black uppercase italic tracking-tight">Special Thanks to</h3>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-white">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {individualSponsors.map((person, i) => (
           <div key={i} className="p-4 bg-zinc-900/20 border border-white/5 rounded-2xl flex items-center gap-4 group hover:border-pink-500/20 transition-all text-white">
             <User size={18} className="text-zinc-600 group-hover:text-pink-500 transition-colors shrink-0" />
@@ -292,7 +291,6 @@ const App = () => {
         </div>
         <div className="flex items-center gap-4 text-white">
           <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors"><Instagram size={20} /></a>
-          {/* UPDATED: DONATE VIA ZEFFY */}
           <button onClick={() => window.open(ZEFFY_DONATE_URL, '_blank')} className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded font-black text-[10px] uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-blue-900/20">Donate via Zeffy</button>
         </div>
       </div>
@@ -312,11 +310,11 @@ const App = () => {
               <div className="max-w-7xl mx-auto px-6 relative z-10 text-white">
                 <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-8 backdrop-blur-sm text-center justify-center text-white">
                   <Sparkles size={14} className="text-blue-400 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] italic text-blue-400 text-center">2026 VEX Worlds Qualified // Missouri</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] italic text-blue-400 text-center">2026 VEX U Worlds Bound</span>
                 </div>
                 <div className="flex justify-center mb-8"><EclipseLogo className="w-72 md:w-96 h-auto text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]" /></div>
                 <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase italic leading-tight text-white text-center">Total <span className="text-blue-500">Engineering</span></h1>
-                <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed italic text-center text-zinc-500 text-white">Building the future through VEX U Competitions. We're headed to the World Championship in Missouri and we want you with us.</p>
+                <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed italic text-center text-zinc-500 text-white">Building the future through VEX U Competitions. We're headed to the World Championship and we want you with us.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <button onClick={() => window.open(ZEFFY_DONATE_URL, '_blank')} className="bg-blue-600 border border-blue-500/20 text-white font-black px-10 py-4 rounded-lg flex items-center gap-2 hover:bg-blue-500 transition-all active:scale-95 w-full sm:w-auto justify-center shadow-lg shadow-blue-900/40 uppercase tracking-widest text-[10px]">Fund Our Missions</button>
                 </div>
@@ -331,23 +329,23 @@ const App = () => {
                    <div className="flex-1 text-center md:text-left">
                      <div className="inline-flex items-center gap-2 text-blue-500 mb-4 uppercase font-black tracking-[0.4em] text-xs italic"><Award size={20} /> Global Excellence</div>
                      <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter text-white mb-6 leading-none">Representing <span className="text-blue-500">Northern California</span></h2>
-                     <p className="text-zinc-400 text-xl font-medium leading-relaxed italic max-w-2xl mx-auto md:mx-0 text-white">Eclipse Robotics is honored to be one of only 140 teams globally invited to join the World Championship in Missouri. We represent the pinnacle of Northern California collegiate engineering performance.</p>
+                     <p className="text-zinc-400 text-xl font-medium leading-relaxed italic max-w-2xl mx-auto md:mx-0 text-white">Eclipse Robotics is honored to be one of only 150 teams globally invited to join the World Championship. We represent the collective engineering efforts of Northern California collegiate innovators.</p>
                    </div>
-                   <div className="p-12 bg-blue-600/10 border border-blue-500/20 rounded-[3rem] text-center shadow-[0_0_50px_rgba(30,58,138,0.3)] min-w-[280px] text-white">
-                      <div className="text-7xl font-black italic text-white mb-2 leading-none text-white">1/140</div>
+                   <div className="p-12 bg-blue-600/10 border border-blue-500/20 rounded-[3rem] text-center shadow-[0_0_50px_rgba(30,58,138,0.3)] min-w-[280px]">
+                      <div className="text-7xl font-black italic text-white mb-2 leading-none text-white">1/150</div>
                       <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 italic text-center md:text-left text-blue-500">Total Global Invitations</div>
                    </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left text-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
                    {[
                      { icon: <Medal size={32} />, title: "Nationals Gold", desc: "Winners of the High Stakes National Championship during our senior year." },
-                     { icon: <Medal size={32} />, title: "Innovation Award", desc: "Recognized for custom mechanical design at the LA Regional Ez Robotics @ Rolling Robots." },
+                     { icon: <Medal size={32} />, title: "Innovation Award", desc: "Recognized for custom mechanical design at Southern California's Ez Robotics VEX U Qualifier @ Rolling Robots." },
                      { icon: <Star size={32} />, title: "10+ Seasonal Awards", desc: "Consistently recognized for design and performance during our high school years under a different plate number." },
-                     { icon: <Star size={32} />, title: "Worlds Qualifier", desc: "Elite final stage qualification for the Missouri 2026 Championships." }
+                     { icon: <Star size={32} />, title: "Worlds Qualifier", desc: "Qualifier for the VEX U World Championship." }
                    ].map((award, i) => (
-                     <div key={i} className="p-8 bg-zinc-900/40 border border-white/5 rounded-3xl hover:border-blue-500/30 transition-all group text-white">
+                     <div key={i} className="p-8 bg-zinc-900/40 border border-white/5 rounded-3xl hover:border-blue-500/30 transition-all group">
                         <div className="text-blue-500 mb-6 group-hover:scale-110 transition-transform">{award.icon}</div>
-                        <h4 className="text-xl font-black uppercase italic text-white mb-2 tracking-tight leading-tight text-white">{award.title}</h4>
+                        <h4 className="text-xl font-black uppercase italic text-white mb-2 tracking-tight leading-tight text-white text-white">{award.title}</h4>
                         <p className="text-zinc-500 text-xs italic font-medium leading-relaxed text-zinc-400">{award.desc}</p>
                      </div>
                    ))}
@@ -365,10 +363,10 @@ const App = () => {
                         <span className="text-[10px] font-black uppercase tracking-[0.3em] italic text-center md:text-left text-blue-500">Origin Record</span>
                      </div>
                      <h2 className="text-5xl font-black uppercase italic tracking-tighter text-white mb-8 leading-none">Our <span className="text-blue-500">Story</span></h2>
-                     <div className="space-y-6 text-zinc-400 text-lg leading-relaxed italic text-center md:text-left text-zinc-400">
+                     <div className="space-y-6 text-zinc-400 text-lg leading-relaxed italic text-center md:text-left text-zinc-400 text-white">
                        <p>Eclipse Robotics began as seniors in high school deciding that graduation wouldn't be the end of our journey. Despite heading to different colleges, we committed to competing together by creating our own separate garage-based team.</p>
                        <p>We proved the dream was real by winning <span className="text-white font-bold">Nationals Gold</span> during the High Stakes season. Transitioning to VEX U, we refined the designs of both our competition robots for this season in CAD for months until just 3 days before our competition.</p>
-                       <p>In a final sprint, we acquired a field from a middle school team and turned our digital models into a physical reality in just 72 hours. We drove to LA for the <span className="text-white font-bold">Ez Robotics @ Rolling Robots</span> event, brought home the Innovation Award, and officially qualified for Missouri.</p>
+                       <p>In a final sprint, we acquired a field from a middle school team and turned our digital models into a physical reality in just 72 hours. We drove to LA for Southern California's Ez Robotics VEX U Qualifier @ Rolling Robots, brought home the Innovation Award, and officially qualified for the World Championships.</p>
                      </div>
                    </div>
                    <div className="relative flex items-center justify-center h-full"><ImageCarousel inline={true} /></div>
@@ -376,27 +374,10 @@ const App = () => {
                </div>
             </section>
 
-            {/* Capabilities Strip */}
-            <section className="py-20 bg-black border-t border-white/5 text-white">
-              <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center sm:text-left text-left text-white">
-                {[
-                  { icon: <Cpu />, title: "Machined Precision", desc: "Building VEX U robots with custom-CADing every millimeter and manufacturing it ourselves to outperform standard components." },
-                  { icon: <Settings />, title: "Intelligent Drive", desc: "Custom manufactured odom and pid for precision and weight reduction." },
-                  { icon: <Globe />, title: "Global Stage", desc: "Representing California collegiate engineering at the world's largest robotics competition." }
-                ].map((item, i) => (
-                  <div key={i} className="p-10 rounded-3xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all group">
-                    <div className="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform shrink-0">{item.icon}</div>
-                    <h3 className="text-2xl font-bold mb-3 italic uppercase text-white leading-tight">{item.title}</h3>
-                    <p className="text-gray-500 leading-relaxed font-medium italic text-sm text-zinc-400">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
             {/* Homepage Sponsors Section */}
             <section className="py-20 border-t border-white/5 bg-zinc-950/50 text-white text-white">
-              <div className="max-w-7xl mx-auto px-6 text-white">
-                <div className="flex items-center gap-3 mb-12 justify-center md:justify-start text-white"><Award className="text-blue-500" size={24} /><h3 className="text-2xl font-black uppercase italic tracking-tight leading-none text-center text-white text-white">Our 2026 Partners</h3></div>
+              <div className="max-w-7xl mx-auto px-6 text-white text-white text-white text-white">
+                <div className="flex items-center gap-3 mb-12 justify-center md:justify-start text-white text-white"><Award className="text-blue-500" size={24} /><h3 className="text-2xl font-black uppercase italic tracking-tight leading-none text-center text-white text-white text-white text-white text-white">Our 2026 Partners</h3></div>
                 <SponsorsSection onContact={() => setActiveTab('contact')} />
               </div>
             </section>
@@ -404,20 +385,20 @@ const App = () => {
             <InstagramFeed loading={loadingIg} posts={igPosts} />
           </>
         )}
-        
+
         {activeTab === 'team' && (
-          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center sm:text-left text-white">
-            <h2 className="text-6xl font-black mb-12 uppercase italic tracking-tighter text-white text-center leading-none">The <span className="text-blue-500">Collective</span></h2>
-            <p className="text-gray-400 text-xl max-w-3xl mb-16 leading-relaxed font-medium italic text-center mx-auto text-zinc-400">Meet the specialists driving Eclipse Robotics toward global excellence in Missouri.</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 text-left text-white">
+          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center sm:text-left text-white text-white">
+            <h2 className="text-6xl font-black mb-12 uppercase italic tracking-tighter text-white text-center leading-none text-white">The <span className="text-blue-500">Collective</span></h2>
+            <p className="text-gray-400 text-xl max-w-3xl mb-16 leading-relaxed font-medium italic text-center mx-auto text-zinc-400 text-white">Meet the specialists driving Eclipse Robotics toward global excellence.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 text-left text-white text-white">
               {teamMembers.map((member, idx) => (
-                <div key={idx} className="group p-6 bg-zinc-900/40 rounded-3xl border border-white/5 hover:border-blue-500/20 transition-all">
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-zinc-800 flex items-center justify-center">
-                    <img src={member.img} alt={member.name} className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110 opacity-60 group-hover:opacity-100" onError={(e) => { e.target.src = 'https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending'; }} />
+                <div key={idx} className="group p-6 bg-zinc-900/40 rounded-3xl border border-white/5 hover:border-blue-500/20 transition-all text-white">
+                  <div className="aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-zinc-800 flex items-center justify-center text-white text-white">
+                    <img src={member.img} alt={member.name} className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110 opacity-60 group-hover:opacity-100 text-white text-white text-white" onError={(e) => { e.target.src = 'https://via.placeholder.com/400x500/18181b/3f3f46?text=Photo+Pending'; }} />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-1 uppercase italic leading-tight">{member.name}</h3>
-                  <div className="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-4 italic">{member.role}</div>
-                  <p className="text-zinc-500 text-sm leading-relaxed italic text-zinc-400">{member.desc}</p>
+                  <h3 className="text-xl font-bold text-white mb-1 uppercase italic leading-tight text-white text-white text-white">{member.name}</h3>
+                  <div className="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-4 italic text-white text-white">{member.role}</div>
+                  <p className="text-zinc-500 text-sm leading-relaxed italic text-zinc-400 text-white text-white text-white">{member.desc}</p>
                 </div>
               ))}
             </div>
@@ -425,36 +406,35 @@ const App = () => {
         )}
 
         {activeTab === 'sponsorship' && (
-          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center md:text-left text-white">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16 text-white">
+          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center md:text-left text-white text-white">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16 text-white text-white text-white">
               <div>
-                <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/20 px-4 py-1 rounded-full mb-4 text-white">
+                <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/20 px-4 py-1 rounded-full mb-4 text-white text-white">
                   <Globe size={14} className="text-blue-400" />
-                  <span className="text-[10px] font-black uppercase tracking-widest italic">Official 2026 Missouri Expedition</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest italic text-white">Official 2026 Worlds Expedition</span>
                 </div>
-                <h2 className="text-6xl font-black uppercase italic mb-4 text-white tracking-tighter leading-tight text-left text-white">Worlds <span className="text-blue-500">Fundraising</span></h2>
-                <p className="text-gray-400 max-w-xl font-medium italic text-lg leading-relaxed text-left text-zinc-500 text-white">Eclipse Robotics is one of only 140 teams globally selected to compete in Missouri. Funds offset registration, team flights, and hardware logistics.</p>
+                <h2 className="text-6xl font-black uppercase italic mb-4 text-white tracking-tighter leading-tight text-left text-white text-white">Worlds <span className="text-blue-500">Fundraising</span></h2>
+                <p className="text-gray-400 max-w-xl font-medium italic text-lg leading-relaxed text-left text-zinc-500 text-white text-white">Eclipse Robotics is one of only 150 teams globally selected to compete at the World Championships. Funds offset registration, team flights, and hardware logistics.</p>
               </div>
-              <div className="flex flex-col items-center md:items-end gap-4 text-white">
-                <div className="bg-blue-600/10 border border-blue-500/20 px-6 py-3 rounded-full text-center">
-                  <span className="text-blue-400 font-black tracking-widest text-sm uppercase italic">Budget: $10,000</span>
+              <div className="flex flex-col items-center md:items-end gap-4 text-white text-white text-white text-white text-white">
+                <div className="bg-blue-600/10 border border-blue-500/20 px-6 py-3 rounded-full text-center text-white">
+                  <span className="text-blue-400 font-black tracking-widest text-sm uppercase italic text-white">Budget: $10,000</span>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 text-white">
                   <a 
                     href={PACKET_PDF_URL} 
                     download 
-                    className="px-8 py-4 bg-white text-black font-black uppercase italic text-[10px] tracking-widest flex items-center gap-3 hover:bg-zinc-200 transition-all shadow-xl active:scale-95 no-underline"
+                    className="px-8 py-4 bg-white text-black font-black uppercase italic text-[10px] tracking-widest flex items-center gap-3 hover:bg-zinc-200 transition-all shadow-xl active:scale-95 no-underline text-white text-black text-black"
                   >
                     <Download size={18} /> Download Packet
                   </a>
-                  {/* UPDATED: DONATE VIA ZEFFY */}
-                  <button onClick={() => window.open(ZEFFY_DONATE_URL, '_blank')} className="bg-blue-600 border border-blue-500/20 text-white font-black px-8 py-4 rounded-lg flex items-center gap-2 hover:bg-blue-500 transition-all active:scale-95 shadow-lg shadow-blue-900/40 uppercase tracking-widest text-[10px]">Donate via Zeffy</button>
+                  <button onClick={() => window.open(ZEFFY_DONATE_URL, '_blank')} className="bg-blue-600 border border-blue-500/20 text-white font-black px-8 py-4 rounded-lg flex items-center gap-2 hover:bg-blue-500 transition-all active:scale-95 shadow-lg shadow-blue-900/40 uppercase tracking-widest text-[10px] text-white">Donate via Zeffy</button>
                 </div>
               </div>
             </div>
 
             {/* Zeffy Thermometer Embed - WRAPPED IN WHITE FOR READABILITY */}
-            <div className="mb-12 relative overflow-hidden w-full h-[140px] rounded-2xl bg-white p-4 shadow-xl">
+            <div className="mb-12 relative overflow-hidden w-full h-[140px] rounded-2xl bg-white p-4 shadow-xl text-white text-white">
               <iframe 
                 title='Donation form powered by Zeffy' 
                 style={{ border: 0, width:'100%', height:'120px' }} 
@@ -464,7 +444,7 @@ const App = () => {
             </div>
 
             {/* Zeffy Campaign Embed */}
-            <div className="mb-24 rounded-3xl overflow-hidden border border-white/10 bg-white min-h-[600px] shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+            <div className="mb-24 rounded-3xl overflow-hidden border border-white/10 bg-white min-h-[600px] shadow-[0_0_50px_rgba(255,255,255,0.05)] text-white text-white">
                <iframe 
                 title='Donation form powered by Zeffy' 
                 style={{ border: 0, width:'100%', height:'800px' }} 
@@ -474,26 +454,26 @@ const App = () => {
                ></iframe>
             </div>
 
-            <div className="mb-24 py-16 border-y border-white/5 text-left text-white">
-              <div className="flex items-center gap-3 mb-12 justify-center md:justify-start text-white text-left text-white">
+            <div className="mb-24 py-16 border-y border-white/5 text-left text-white text-white text-white text-white text-white">
+              <div className="flex items-center gap-3 mb-12 justify-center md:justify-start text-white text-left text-white text-white text-white text-white text-white text-white text-white text-white">
                  <Award className="text-blue-500" size={24} />
-                 <h3 className="text-2xl font-black uppercase italic tracking-tight text-left text-white">Current Partners</h3>
+                 <h3 className="text-2xl font-black uppercase italic tracking-tight text-left text-white text-white text-white text-white text-white text-white text-white text-white text-white text-white">Current Partners</h3>
               </div>
               <SponsorsSection onContact={() => setActiveTab('contact')} />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24 text-center sm:text-left text-white text-white text-white">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24 text-center sm:text-left text-white text-white text-white text-white text-white text-white text-white">
               {[
-                { title: "Team Flights", val: "$3,500", desc: "Air travel for 6 members to Missouri." },
+                { title: "Team Flights", val: "$3,500", desc: "Air travel for 6 members to the World Championships." },
                 { title: "Registration", val: "$1,500", desc: "Official World Championship entry fees." },
-                { title: "Hotel & Logistics", val: "$2,500", desc: "Accommodation and transit in Missouri." },
+                { title: "Hotel & Logistics", val: "$2,500", desc: "Accommodation and transit during competition." },
                 { title: "Hardware/Build", val: "$2,500", desc: "Custom CNC parts and advanced sensors." }
               ].map((card, i) => (
-                <div key={i} className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 relative group overflow-hidden text-left text-white">
-                  <div className="absolute -top-4 -right-4 text-white/5 font-black text-6xl italic leading-none text-white">0{i+1}</div>
-                  <h4 className="text-blue-400 font-black text-[10px] uppercase tracking-widest mb-2 italic leading-none">{card.title}</h4>
-                  <div className="text-3xl font-black text-white mb-2 italic leading-none text-white">{card.val}</div>
-                  <p className="text-[10px] text-zinc-500 font-medium italic leading-relaxed text-zinc-500 text-zinc-400">{card.desc}</p>
+                <div key={i} className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 relative group overflow-hidden text-left text-white text-white text-white text-white text-white">
+                  <div className="absolute -top-4 -right-4 text-white/5 font-black text-6xl italic leading-none text-white text-white text-white text-white text-white text-white">0{i+1}</div>
+                  <h4 className="text-blue-400 font-black text-[10px] uppercase tracking-widest mb-2 italic leading-none text-white text-white text-white">{card.title}</h4>
+                  <div className="text-3xl font-black text-white mb-2 italic leading-none text-white text-white text-white text-white text-white">{card.val}</div>
+                  <p className="text-[10px] text-zinc-500 font-medium italic leading-relaxed text-zinc-500 text-zinc-400 text-white text-white text-white text-white">{card.desc}</p>
                 </div>
               ))}
             </div>
@@ -501,51 +481,51 @@ const App = () => {
         )}
 
         {activeTab === 'contact' && (
-          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center text-white">
-            <h2 className="text-6xl font-black mb-6 uppercase italic tracking-tighter text-white leading-none text-center">Get In <span className="text-blue-500">Touch</span></h2>
-            <p className="text-gray-400 mb-16 max-w-xl mx-auto font-medium text-lg leading-relaxed italic text-center text-zinc-500"> Reach out for sponsorship, workshops, or inquiries.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left text-white">
-              <div className="p-12 bg-zinc-900/40 border border-white/5 rounded-[2.5rem] relative overflow-hidden group text-white text-left">
-                <Mail className="text-blue-400 mb-6 group-hover:scale-110 transition-transform" size={48} />
-                <div className="font-black text-3xl mb-2 italic uppercase tracking-tighter leading-tight text-left">Inquiries</div>
-                <div className="text-gray-400 text-lg font-medium mb-8 leading-none text-blue-500 font-bold text-left">{TEAM_EMAIL}</div>
-                <div className="space-y-2 text-zinc-500 text-sm italic font-medium text-white">
-                  <div className="flex items-center gap-2 text-zinc-500"><Users size={14}/> {CONTACT_PERSON}</div>
-                  <div className="flex items-center gap-2 text-zinc-500"><Phone size={14}/> {CONTACT_PHONE}</div>
+          <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center text-white text-white text-white text-white text-white">
+            <h2 className="text-6xl font-black mb-6 uppercase italic tracking-tighter text-white leading-none text-center text-white text-white text-white text-white text-white">Get In <span className="text-blue-500">Touch</span></h2>
+            <p className="text-gray-400 mb-16 max-w-xl mx-auto font-medium text-lg leading-relaxed italic text-center text-zinc-500 text-white text-white text-white text-white text-white"> Reach out for sponsorship, workshops, or inquiries.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left text-white text-white text-white text-white text-white text-white text-white text-white">
+              <div className="p-12 bg-zinc-900/40 border border-white/5 rounded-[2.5rem] relative overflow-hidden group text-white text-left text-white text-white text-white text-white text-white">
+                <Mail className="text-blue-400 mb-6 group-hover:scale-110 transition-transform text-white text-white text-white text-white" size={48} />
+                <div className="font-black text-3xl mb-2 italic uppercase tracking-tighter leading-tight text-left text-white text-white text-white text-white text-white text-white">Inquiries</div>
+                <div className="text-gray-400 text-lg font-medium mb-8 leading-none text-blue-500 font-bold text-left text-white text-white text-white text-white">{TEAM_EMAIL}</div>
+                <div className="space-y-2 text-zinc-500 text-sm italic font-medium text-white text-white text-white text-white text-white">
+                  <div className="flex items-center gap-2 text-zinc-500 text-white text-white text-white text-white"><Users size={14}/> {CONTACT_PERSON}</div>
+                  <div className="flex items-center gap-2 text-zinc-500 text-white text-white text-white text-white"><Phone size={14}/> {CONTACT_PHONE}</div>
                 </div>
-                <div className="flex gap-3 mt-8 text-white">
-                  <a href={`mailto:${TEAM_EMAIL}`} className="bg-blue-600 text-white px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 transition-all active:scale-95 shadow-lg shadow-blue-900/20 text-white no-underline text-center">Send Email</a>
-                  <button onClick={copyToClipboard} className="bg-white/5 text-white border border-white/10 px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2 text-white text-white text-white">
+                <div className="flex gap-3 mt-8 text-white text-white text-white text-white text-white text-white text-white">
+                  <a href={`mailto:${TEAM_EMAIL}`} className="bg-blue-600 text-white px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 transition-all active:scale-95 shadow-lg shadow-blue-900/20 text-white no-underline text-center text-white text-white text-white text-white text-white">Send Email</a>
+                  <button onClick={copyToClipboard} className="bg-white/5 text-white border border-white/10 px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2 text-white text-white text-white text-white text-white text-white text-white text-white text-white text-white text-white">
                     {copied ? <Check size={14} /> : <Copy size={14} />} {copied ? 'Copied' : 'Copy Email'}
                   </button>
                 </div>
               </div>
-              <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="p-12 bg-zinc-900/40 border border-white/5 rounded-[2rem] hover:border-pink-500/40 transition-all group relative overflow-hidden text-center sm:text-left flex flex-col justify-center text-white no-underline text-left">
-                <Instagram className="text-pink-500 mb-6 group-hover:scale-110 transition-transform" size={48} />
-                <div className="font-black text-3xl mb-2 italic uppercase tracking-tighter leading-tight text-left text-white">Social Feed</div>
-                <div className="text-gray-400 text-xl font-medium italic mb-2 leading-none text-left text-zinc-400">@eclipse_robotics</div>
-                <div className="mt-4 text-pink-500 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">Follow progress <ChevronRight size={16} /></div>
+              <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="p-12 bg-zinc-900/40 border border-white/5 rounded-[2rem] hover:border-pink-500/40 transition-all group relative overflow-hidden text-center sm:text-left flex flex-col justify-center text-white no-underline text-left text-white text-white text-white text-white text-white text-white text-white text-white">
+                <Instagram className="text-pink-500 mb-6 group-hover:scale-110 transition-transform text-white text-white text-white text-white text-white text-white text-white text-white" size={48} />
+                <div className="font-black text-3xl mb-2 italic uppercase tracking-tighter leading-tight text-left text-white text-white text-white text-white text-white text-white text-white text-white text-white text-white">Social Feed</div>
+                <div className="text-gray-400 text-xl font-medium italic mb-2 leading-none text-left text-zinc-400 text-white text-white text-white text-white text-white text-white text-white">@eclipse_robotics</div>
+                <div className="mt-4 text-pink-500 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 text-white text-white text-white text-white text-white">Follow progress <ChevronRight size={16} /></div>
               </a>
             </div>
           </div>
         )}
       </main>
 
-      <footer className="py-20 bg-zinc-950 border-t border-white/5 mt-20 text-white text-white">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left text-white">
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <EclipseLogo className="h-10 w-auto text-white" />
-            <p className="text-zinc-600 text-[9px] font-black tracking-[0.4em] uppercase italic leading-none">California Collegiate Collective // © 2026</p>
+      <footer className="py-20 bg-zinc-950 border-t border-white/5 mt-20 text-white text-white text-white text-white text-white text-white text-white text-white text-white text-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left text-white text-white text-white text-white text-white text-white text-white text-white">
+          <div className="flex flex-col items-center md:items-start gap-4 text-white text-white text-white text-white text-white text-white text-white">
+            <EclipseLogo className="h-10 w-auto text-white text-white text-white" />
+            <p className="text-zinc-600 text-[9px] font-black tracking-[0.4em] uppercase italic leading-none text-white text-white text-white text-white text-white text-white">California Collegiate Collective // © 2026</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 text-zinc-500 text-[10px] font-black uppercase tracking-widest italic text-zinc-600">
-             <button onClick={() => setActiveTab('home')} className="hover:text-blue-500 transition-colors uppercase">Home</button>
-             <button onClick={() => setActiveTab('team')} className="hover:text-blue-500 transition-colors uppercase text-zinc-600">Personnel</button>
-             <button onClick={() => setActiveTab('sponsorship')} className="hover:text-blue-500 transition-colors uppercase">Sponsorship</button>
-             <button onClick={() => setActiveTab('contact')} className="hover:text-blue-500 transition-colors uppercase">Contact</button>
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 text-zinc-500 text-[10px] font-black uppercase tracking-widest italic text-zinc-600 text-white text-white text-white text-white text-white text-white">
+             <button onClick={() => setActiveTab('home')} className="hover:text-blue-500 transition-colors uppercase text-white text-white text-white">Home</button>
+             <button onClick={() => setActiveTab('team')} className="hover:text-blue-500 transition-colors uppercase text-white text-white text-white">Personnel</button>
+             <button onClick={() => setActiveTab('sponsorship')} className="hover:text-blue-500 transition-colors uppercase text-white text-white text-white text-white text-white text-white">Sponsorship</button>
+             <button onClick={() => setActiveTab('contact')} className="hover:text-blue-500 transition-colors uppercase text-white text-white text-white text-white text-white text-white">Contact</button>
           </div>
-          <div className="flex gap-8 text-zinc-400 text-center text-zinc-600">
-             <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors"><Instagram size={24} /></a>
-             <button onClick={() => setActiveTab('team')} className="hover:text-white transition-colors"><Trophy size={24} /></button>
+          <div className="flex gap-8 text-zinc-400 text-center text-zinc-600 text-white text-white text-white text-white text-white text-white text-white text-white text-white">
+             <a href="https://www.instagram.com/eclipse_robotics/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors text-white text-white text-white text-white text-white text-white text-white text-white text-white"><Instagram size={24} /></a>
+             <button onClick={() => setActiveTab('team')} className="hover:text-white transition-colors text-white text-white text-white text-white text-white text-white text-white text-white"><Trophy size={24} /></button>
           </div>
         </div>
       </footer>
