@@ -425,7 +425,7 @@ const App = () => {
                   <a 
                     href={PACKET_PDF_URL} 
                     download 
-                    className="px-8 py-4 bg-white text-black font-black uppercase italic text-[10px] tracking-widest flex items-center gap-3 hover:bg-zinc-200 transition-all shadow-xl active:scale-95 no-underline text-white text-black text-black"
+                    className="px-8 py-4 bg-white text-black font-black uppercase italic text-[10px] tracking-widest flex items-center gap-3 hover:bg-zinc-200 transition-all shadow-xl active:scale-95 no-underline"
                   >
                     <Download size={18} /> Download Packet
                   </a>
