@@ -54,7 +54,7 @@ const ZEFFY_EMBED_URL = "https://www.zeffy.com/embed/donation-form/helps-us-comp
 const ZEFFY_THERMOMETER_URL = "https://www.zeffy.com/embed/thermometer/helps-us-compete-at-the-vex-worlds-competition";
 
 const TEAM_EMAIL = "eclipseroboticsca@gmail.com";
-const CONTACT_PERSON = "Paul Corisuelo Valencia";
+const CONTACT_PERSON = "Paul Corisuelo-Valencia";
 const CONTACT_PHONE = "(209) 689-6655";
 const PACKET_PDF_URL = "/Eclipse_Robotics_Sponsorship_Packet.pdf";
 
