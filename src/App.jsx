@@ -394,7 +394,7 @@ const App = () => {
                      </div>
                      <h2 className="text-5xl font-black uppercase italic tracking-tighter text-white mb-8 leading-none">Our <span className="text-blue-500">Story</span></h2>
                      <div className="space-y-6 text-zinc-400 text-lg leading-relaxed italic">
-                       <p>Eclipse Robotics began as seniors in high school deciding that graduation wouldn't be the end of our journey. Despite heading to different colleges, we committed to competing together by creating our own separate garage-based team.</p>
+                       <p>Eclipse Robotics began as seniors in high school deciding that graduation wouldn't be the end of our journey. Despite heading to different colleges, we committed to competing together by creating our own separate garage-based team. Our team consists of: Elijah Macatuno, Paul Consuelo-Valencia, Gabriel Salazar-Dinh, Aleksei Macatuno, Emily Gomez-Valle and Janna Tang</p>
                        <p>We proved the dream was real by winning <span className="text-white font-bold">Nationals Gold</span> during the High Stakes season. Transitioning to VEX U, we refined the designs of both our competition robots for this season in CAD for months until just 3 days before our competition.</p>
                        <p>In a final sprint, we acquired a field from a middle school team and turned our digital models into a physical reality in just 72 hours. We drove to LA for Southern California's Ez Robotics VEX U Qualifier @ Rolling Robots, brought home the Innovation Award, and officially qualified for the World Championships.</p>
                      </div>
